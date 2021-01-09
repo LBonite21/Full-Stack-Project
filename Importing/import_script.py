@@ -1,3 +1,6 @@
+# python -m pip install pymongo
+# pip install bcrypt
+
 from pymongo import MongoClient
 import bcrypt
 import csv
