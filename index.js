@@ -19,3 +19,6 @@ let urlencodedParser = bodyParser.urlencoded({
 });
 
 app.get('/', route.root);
+app.get('/:excess', route.root)
+
+app.listen(3000);
