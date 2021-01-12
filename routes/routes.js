@@ -4,8 +4,7 @@ const e = require('express');
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const url = 'mongodb://127.0.0.1:27017/fandingo';
-mongoose.connect(url, { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/fandingo');
 
 const mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error:'));
@@ -29,10 +28,10 @@ var accountSchema = mongoose.Schema({
 var Account = mongoose.model('accounts', accountSchema);
 
 exports.root = (req,res) => {
-    Account.find({}), (err,accounts) => {
+    Account.find((err,accounts) => {
         if(err) throw err;
-        res.render('root'), {
+        res.render('root', {
             accounts
-        };
-    }
+        });
+    });
 }
