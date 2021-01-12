@@ -2,11 +2,12 @@ const bcrypt = require('bcrypt');
 const { text } = require('body-parser');
 const e = require('express');
 
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://127.0.0.1/fandingo');
+const url = 'mongodb://127.0.0.1:27017/fandingo';
+mongoose.connect(url, { useNewUrlParser: true });
 
-let mdb = mongoose.connection;
+const mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error:'));
 mdb.once('open', function (callback) {
 
