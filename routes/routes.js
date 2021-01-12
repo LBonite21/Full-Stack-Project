@@ -20,7 +20,7 @@ var accountSchema = mongoose.Schema({
     state: String,
     zip_code: String,
     email: String,
-    password: Buffer,
+    password: String,
     phone: String,
     reviews: Array
 });
