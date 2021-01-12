@@ -28,6 +28,5 @@ var accountSchema = mongoose.Schema({
 var Account = mongoose.model('Account_Collection', accountSchema);
 
 exports.root = (req,res) => {
-    if(err) throw err;
     res.render('root');
 }
