@@ -4,5 +4,22 @@ html
         link(href="/style.css" rel="styleseet")
     body
         h1 Test
-        each account in accounts
-            p #{account}
+        form(id="movieReviewForm" action="")
+            p Email:
+                input(id="emailInput" type="text" placeholder="email...")
+            br
+            p Rating:
+                select(id="ratingInput" name="rating" disabled)
+                    option(value="1") 1 star
+                    option(value="2") 2 star
+                    option(value="3") 3 star
+                    option(value="4") 4 star
+                    option(value="5") 5 star
+            br
+            p Review:
+                textarea(id="reviewInput" name="reviews", cols="30", rows="10" disabled)
+            br
+            input(id="submitBtn" type="submit")
+
+    script var data = !{JSON.stringify(accounts)}
+    script(src="/js/script.js")
