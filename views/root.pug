@@ -4,9 +4,9 @@ html
         link(href="/style.css" rel="styleseet")
     body
         h1 Test
-        form(id="movieReviewForm" action="")
+        form(id="movieReviewForm" method="POST")
             p Email:
-                input(id="emailInput" type="text" placeholder="email...")
+                input(id="emailInput" name="email" type="text" placeholder="Email...")
             br
             p Rating:
                 select(id="ratingInput" name="rating" disabled)
@@ -17,7 +17,7 @@ html
                     option(value="5") 5 star
             br
             p Review:
-                textarea(id="reviewInput" name="reviews", cols="30", rows="10" disabled)
+                textarea(id="reviewInput" name="review", cols="30", rows="10" disabled)
             br
             input(id="submitBtn" type="submit")
 
