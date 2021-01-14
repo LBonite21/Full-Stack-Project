@@ -28,6 +28,9 @@ var Account = mongoose.model("accounts", accountSchema);
 exports.root = (req, res) => {
   Account.find((err, accounts) => {
     if (err) throw err;
+    // accounts.forEach(account => {
+    //   account.reviews = [];
+    // });
     res.render("root", {
       accounts,
     });
@@ -39,15 +42,46 @@ exports.test = (req, res) => {
   let rev = {
     review: req.body.review,
     rating: req.body.rating,
+    movieId: 2145
   };
+  let reviewedMovieBefore = false;
 
-  Account.findOneAndUpdate(
-    { email: req.body.email },
-    { $push: { reviews: rev } },
-    (err, data) => {
-      if (err) res.send(err);
-      console.log(data);
+  Account.find({email: req.body.email},(err,account) => {
+    if(err) throw err;
+    console.log(account)
+    account[0].reviews.forEach(review => {
+      if(review.movieId == rev.movieId){
+        reviewedMovieBefore = true;
+      }
+    });
+    if(reviewedMovieBefore){
+      let reviews = account[0].reviews;
+      reviews.forEach(review => {
+        if(review.movieId == rev.movieId){
+          review.rating = rev.rating;
+          review.review = rev.review;
+        }
+      });
+      Account.findOneAndUpdate(
+        { email: req.body.email },
+        { $set: { reviews: reviews } },
+        (err, data) => {
+          if (err) res.send(err);
+          console.log(data);
+        }
+      );
     }
-  );
-  res.redirect("/");
+    else{      
+      Account.findOneAndUpdate(
+        { email: req.body.email },
+        { $push: { reviews: rev } },
+        (err, data) => {
+          if (err) res.send(err);
+          console.log(data);
+        }
+      );
+    }
+    res.redirect('/');
+  })
+
 };
