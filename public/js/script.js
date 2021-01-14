@@ -7,6 +7,11 @@ let submit = document.getElementById("submitBtn");
 
 email.addEventListener('input', evt => {
     let log = evt.target.value;
+    rating.disabled = true;
+    review.disabled = true;
+    submit.disabled = true;
+    review.innerText = "";
+    rating.value = 1;
     data.forEach(user => {
         if (log === user.email) {
             rating.disabled = false;

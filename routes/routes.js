@@ -28,9 +28,6 @@ var Account = mongoose.model("accounts", accountSchema);
 exports.root = (req, res) => {
   Account.find((err, accounts) => {
     if (err) throw err;
-    // accounts.forEach(account => {
-    //   account.reviews = [];
-    // });
     res.render("root", {
       accounts,
     });
@@ -38,7 +35,6 @@ exports.root = (req, res) => {
 };
 
 exports.test = (req, res) => {
-  // console.log(req.body.email);
   let rev = {
     review: req.body.review,
     rating: req.body.rating,
