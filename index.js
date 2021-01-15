@@ -1,4 +1,5 @@
 const express = require('express');
+const expressSession = require('express-session');
 const pug = require('pug');
 const path = require('path');
 const route = require('./routes/routes.js');
@@ -8,6 +9,17 @@ const cors = require('cors');
 let app = express();
 
 app.use(cors());
+app.use(expressSession({ secret: "secret", saveUninitialized: true, resave: true }));
+
+
+const checkAuth = (req,res,next) => {
+    if(req.session.user && req.session.user.isAuthenticated) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+};
+
 
 app.set('view engine', 'pug');
 app.set('views', __dirname+'/views');
@@ -19,7 +31,9 @@ let urlencodedParser = bodyParser.urlencoded({
 });
 
 app.get('/', route.root);
-app.post('/', urlencodedParser, route.test);
+app.post('/', urlencodedParser, route.login);
+app.get('/moviePage', checkAuth, route.moviePage);
+app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.get('/:excess', route.root)
 
 app.listen(3000);

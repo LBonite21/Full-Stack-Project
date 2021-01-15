@@ -3,22 +3,23 @@ html
     head
         link(href="/style.css" rel="styleseet")
     body
-        h1 Test
         form(id="movieReviewForm" method="POST")
             p Email:
-                input(id="emailInput" name="email" type="text" placeholder="Email...")
+                input(id="emailInput" name="email" type="text" placeholder="example@something.com")
             br
-            p Rating:
-                select(id="ratingInput" name="rating" disabled)
-                    option(value="1") 1 star
-                    option(value="2") 2 star
-                    option(value="3") 3 star
-                    option(value="4") 4 star
-                    option(value="5") 5 star
-            br
-            p Review:
-                textarea(id="reviewInput" name="review", cols="30", rows="10" disabled)
-            br
+            p Password: 
+                input(id='passwordInput' name='password' type='password')
+            //- p Rating:
+            //-     select(id="ratingInput" name="rating" disabled)
+            //-         option(value="1") 1 star
+            //-         option(value="2") 2 star
+            //-         option(value="3") 3 star
+            //-         option(value="4") 4 star
+            //-         option(value="5") 5 star
+            //- br
+            //- p Review:
+            //-     textarea(id="reviewInput" name="review", cols="30", rows="10" disabled)
+            //- br
             input(id="submitBtn" type="submit" disabled)
 
     script var data = !{JSON.stringify(accounts)}
