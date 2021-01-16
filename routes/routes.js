@@ -64,23 +64,28 @@ exports.moviePageSearch = (req, res) => {
     request.open('GET', title_search, true);
 
     request.onload = () => {
+      let list = JSON.parse(request.responseText).results;
+      list.title = true;
+
       res.render('layout', {
-        movieList: JSON.parse(request.responseText)
+        movieList: list
       });
     }
 
     request.send();
-    console.log(true)
   }
   if (actor) {
-    actor_search  = `https://api.themoviedb.org/3/search/person?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&query=${encodeURI(actor)}&page=1&include_adult=false`;
+    actor_search  = `https://api.themoviedb.org/3/search/person?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&query=${encodeURI(actor)}&page=1&include_adult=false&media_type=movie`;
     let request = new XMLHttpRequest();
 
     request.open('GET', actor_search, true);
 
     request.onload = () => {
+      let list = JSON.parse(request.responseText).results;
+      list.actor = true;
+
       res.render('layout', {
-        movieList: JSON.parse(request.responseText)
+        movieList: list
       });
     }
 
@@ -90,6 +95,7 @@ exports.moviePageSearch = (req, res) => {
     // console.log(returnGenreId(req.body.genre));
     // console.log(genre);
     let request = new XMLHttpRequest();
+    let request2 = new XMLHttpRequest();
 
     request.open('GET', genres, true);
 
@@ -101,10 +107,18 @@ exports.moviePageSearch = (req, res) => {
             genreId = genre.id;
             genre_search = `https://api.themoviedb.org/3/discover/movie?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${encodeURI(genreId)}`;
           
-            // TODO Fetch Genre movies
-            // res.render('moviePage', {
-            //   movieList: ""//stuff
-            // });
+            request2.open('GET', genre_search, true);
+
+            request2.onload = () => {
+              let list = JSON.parse(request2.responseText).results;
+              list.genre = true;
+
+              res.render('layout', {
+                movieList: list
+              });
+            }
+
+            request2.send();
           }
         });
       } else {

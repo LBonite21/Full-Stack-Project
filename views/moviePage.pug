@@ -1,9 +1,13 @@
+link(href="style.css" rel="stylesheet")
+
 form(id="searchTerms" method="POST")
     p Movie Title:
         input(id="title" name="title" type="text" placeholder="Avengers")
     p Genre:
         input(id="genre" name="genre" type="text" placeholder="Action")
     p Actor:
-        input(id="actor" name="actor" type="text" placeholder="Chris Evans")
+        input(id="actor" name="actor" type="text" placeholder="Robert Downey Jr." autocomplete="off")
 
     input(type='submit' value='Search')
+
+block content
