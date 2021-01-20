@@ -1,7 +1,6 @@
 extends moviePage
 
 block content
-
     if movieList.actor
         each movie in movieList
             each known_for in movie.known_for
@@ -16,17 +15,13 @@ block content
                                 else 
                                     img(alt='Movie Poster Does Not Exist')
                             h1 #{known_for.original_title}
-                    div(class='box' style='display: none;')
+                    div(class='box' style='display: block;')
                         form(class='reviewForm' method='post')
                             label(for="review") Add a Review:
                                 textarea(id="reviewInput" name="review", cols="30", rows="10" placeholder="Type your review here...")
                             label(for='rating') Add a Rating:
-                                select(id="ratingInput" name="rating")
-                                    option(value="1") 1 star
-                                    option(value="2") 2 star
-                                    option(value="3") 3 star
-                                    option(value="4") 4 star
-                                    option(value="5") 5 star
+                                input(type='range' min='0' max='9' name="rating" class='slider' value='0')
+                                img(src='img/star_rating_0.png')
                             input(type="submit" value='Submit Review')
                     div(class='box')
                         //- All Reviews
@@ -38,41 +33,32 @@ block content
                 div(class='box')    
                     img(src=`https://image.tmdb.org/t/p/w500${movie.poster_path}`)
                     h1 #{movie.original_title}
-                div(class='box' style='display: none;')
+                div(class='box' style='display: block;')
                     form(class='reviewForm' method='post')
                         label(for="review") Add a Review:
                             textarea(id="reviewInput" name="review", cols="30", rows="10" placeholder="Type your review here...")
                         label(for='rating') Add a Rating:
-                            select(id="ratingInput" name="rating")
-                                option(value="1") 1 star
-                                option(value="2") 2 star
-                                option(value="3") 3 star
-                                option(value="4") 4 star
-                                option(value="5") 5 star
+                            input(type='range' min='0' max='9' name="rating" class='slider' value='0')
+                            img(src='img/star_rating_0.png')
                         input(type="submit" value='Submit Review')
                 div(class='box')
                     //- All Reviews
                     p Reviews
+    
     if movieList.genre
         each movie in movieList
             div(class='parent-div')
                 div(class='box')
                     img(src=`https://image.tmdb.org/t/p/w500${movie.poster_path}`)
                     h1 #{movie.original_title}
-                div(class='box' style='display: none;')
+                div(class='box' style='display: block;')
                     form(class='reviewForm' method='post')
                         label(for="review") Add a Review:
                             textarea(id="reviewInput" name="review", cols="30", rows="10" placeholder="Type your review here...")
                         label(for='rating') Add a Rating:
-                            select(id="ratingInput" name="rating")
-                                option(value="1") 1 star
-                                option(value="2") 2 star
-                                option(value="3") 3 star
-                                option(value="4") 4 star
-                                option(value="5") 5 star
+                            input(type='range' min='0' max='9' name="rating" class='slider' value='0')
+                            img(src='img/star_rating_0.png')
                         input(type="submit" value='Submit Review')
                 div(class='box')
                     //- All Reviews
                     p Reviews
-
-    script(src="/js/movieReviews.js")
