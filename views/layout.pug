@@ -16,7 +16,7 @@ block content
                                     img(alt='Movie Poster Does Not Exist')
                             h1 #{known_for.original_title}
                     div(class='box' style='display: block;')
-                        form(class='reviewForm' method='post')
+                        form(class='reviewForm' method='post' action='/sendReview')
                             label(for="review") Add a Review:
                                 textarea(id="reviewInput" name="review", cols="30", rows="10" placeholder="Type your review here...")
                             label(for='rating') Add a Rating:
@@ -34,7 +34,7 @@ block content
                     img(src=`https://image.tmdb.org/t/p/w500${movie.poster_path}`)
                     h1 #{movie.original_title}
                 div(class='box' style='display: block;')
-                    form(class='reviewForm' method='post')
+                    form(class='reviewForm' method='post' action='/sendReview')
                         label(for="review") Add a Review:
                             textarea(id="reviewInput" name="review", cols="30", rows="10" placeholder="Type your review here...")
                         label(for='rating') Add a Rating:
@@ -52,7 +52,8 @@ block content
                     img(src=`https://image.tmdb.org/t/p/w500${movie.poster_path}`)
                     h1 #{movie.original_title}
                 div(class='box' style='display: block;')
-                    form(class='reviewForm' method='post')
+                    form(class='reviewForm' method='post' action='/sendReview')
+                        input(type="hidden" name="movieId" value=#{movie.id})
                         label(for="review") Add a Review:
                             textarea(id="reviewInput" name="review", cols="30", rows="10" placeholder="Type your review here...")
                         label(for='rating') Add a Rating:

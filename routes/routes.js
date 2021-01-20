@@ -55,7 +55,8 @@ exports.moviePageSearch = (req, res) => {
   let title = req.body.title;
   let actor = req.body.actor;
   let genreId; 
-  
+
+
   // Priorities TITLE as a search and then GENRE and then ACTORS
   if (title) {
     title_search = `https://api.themoviedb.org/3/search/movie?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&query=${encodeURI(title)}&page=1&include_adult=false`;
@@ -66,6 +67,7 @@ exports.moviePageSearch = (req, res) => {
     request.onload = () => {
       let list = JSON.parse(request.responseText).results;
       list.title = true;
+      req.session.user.queriedMovies = list;
 
       res.render('layout', {
         movieList: list
@@ -83,6 +85,7 @@ exports.moviePageSearch = (req, res) => {
     request.onload = () => {
       let list = JSON.parse(request.responseText).results;
       list.actor = true;
+      req.session.user.queriedMovies = list;
 
       res.render('layout', {
         movieList: list
@@ -112,6 +115,7 @@ exports.moviePageSearch = (req, res) => {
             request2.onload = () => {
               let list = JSON.parse(request2.responseText).results;
               list.genre = true;
+              req.session.user.queriedMovies = list;
 
               res.render('layout', {
                 movieList: list
@@ -128,6 +132,7 @@ exports.moviePageSearch = (req, res) => {
 
     request.send();
   }
+  
 }
 
 exports.login = (req, res) => {
@@ -153,11 +158,11 @@ exports.test = (req, res) => {
   let rev = {
     review: req.body.review,
     rating: req.body.rating,
-    movieId: 2145
+    movieId: req.body.movieId
   };
   let reviewedMovieBefore = false;
 
-  Account.find({email: req.body.email},(err,account) => {
+  Account.find({email: req.session.user.account.email},(err,account) => {
     if(err) throw err;
     console.log(account)
     account[0].reviews.forEach(review => {
@@ -174,7 +179,7 @@ exports.test = (req, res) => {
         }
       });
       Account.findOneAndUpdate(
-        { email: req.body.email },
+        { email: req.session.user.account.email },
         { $set: { reviews: reviews } },
         (err, data) => {
           if (err) res.send(err);
@@ -184,7 +189,7 @@ exports.test = (req, res) => {
     }
     else{      
       Account.findOneAndUpdate(
-        { email: req.body.email },
+        { email: req.session.user.account.email },
         { $push: { reviews: rev } },
         (err, data) => {
           if (err) res.send(err);
@@ -192,7 +197,10 @@ exports.test = (req, res) => {
         }
       );
     }
-    res.redirect('/');
+    res.redirect('/moviePage');
+    // res.render('/moviePage', {
+    //   movieList: req.session.user.queriedMovies
+    // });
   })
 
 };

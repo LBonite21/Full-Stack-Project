@@ -34,6 +34,7 @@ app.get('/', route.root);
 app.post('/', urlencodedParser, route.login);
 app.get('/moviePage', checkAuth, route.moviePage);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
+app.post('/sendReview', urlencodedParser, route.test);
 app.get('/:excess', route.root)
 
 app.listen(3000);
