@@ -48,6 +48,28 @@ exports.moviePage = (req, res) => {
 }
 
 exports.moviePageSearch = (req, res) => {
+  let r = [];
+  let a;
+
+  Account.find((err, accounts) => {
+    if (err) throw err;
+
+    accounts.forEach(user => {
+      if (user.reviews.length !== 0) {
+        user.reviews.forEach(rev => {
+          let object = {
+            review: rev,
+            name: `${user.fname}${user.lname[0]}`,
+            email: user.email
+          }
+          r.push(object);
+        })
+      }
+    });
+
+    console.log(r)
+  });
+
   // Use search terms to get API data back.
   let genre_search;
   let title_search
@@ -70,7 +92,9 @@ exports.moviePageSearch = (req, res) => {
       req.session.user.queriedMovies = list;
 
       res.render('layout', {
-        movieList: list
+        movieList: list,
+        reviews: r,
+        loggedInUser: req.session.user.account
       });
     }
 
@@ -88,7 +112,9 @@ exports.moviePageSearch = (req, res) => {
       req.session.user.queriedMovies = list;
 
       res.render('layout', {
-        movieList: list
+        movieList: list,
+        reviews: r,
+        loggedInUser: req.session.user.account
       });
     }
 
@@ -118,7 +144,9 @@ exports.moviePageSearch = (req, res) => {
               req.session.user.queriedMovies = list;
 
               res.render('layout', {
-                movieList: list
+                movieList: list,
+                reviews: r,
+                loggedInUser: req.session.user.account
               });
             }
 
@@ -204,3 +232,13 @@ exports.test = (req, res) => {
   })
 
 };
+
+exports.logout = (req,res) => {
+  req.session.destroy(err => {
+      if(err) {
+          console.log(err);
+      } else {
+          res.redirect('/');
+      }
+  });
+}

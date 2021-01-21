@@ -33,8 +33,10 @@ let urlencodedParser = bodyParser.urlencoded({
 app.get('/', route.root);
 app.post('/', urlencodedParser, route.login);
 app.get('/moviePage', checkAuth, route.moviePage);
+app.get('/logout', route.logout);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.post('/sendReview', urlencodedParser, route.test);
+app.post('/editReview', urlencodedParser, route.test);
 app.get('/:excess', route.root)
 
 app.listen(3000);
