@@ -22,3 +22,11 @@
     justify-content: center;
     align-items: center;
 }
+
+#navBar {
+    background-color: red;
+}
+
+html {
+    background-color: blue;
+}
