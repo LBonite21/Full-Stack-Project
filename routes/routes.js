@@ -12,6 +12,7 @@ mdb.on("error", console.error.bind(console, "connection error:"));
 mdb.once("open", function (callback) {});
 
 var accountSchema = mongoose.Schema({
+  isAdmin: Boolean,
   username: String,
   fname: String,
   lname: String,
