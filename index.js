@@ -34,6 +34,7 @@ app.get('/', route.root);
 app.post('/', urlencodedParser, route.login);
 app.get('/moviePage', checkAuth, route.moviePage);
 app.get('/logout', route.logout);
+app.get('/editAccount', route.editAccount);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.post('/sendReview', urlencodedParser, route.test);
 app.post('/editReview', urlencodedParser, route.test);

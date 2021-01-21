@@ -244,3 +244,9 @@ exports.logout = (req,res) => {
       }
   });
 }
+
+exports.editAccount = (req, res) => {
+  res.render("editAccount", {
+    account: req.session.user.account
+  });
+}
