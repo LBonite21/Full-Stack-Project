@@ -14,7 +14,7 @@ email.addEventListener('input', evt => {
     // review.innerText = "";
     // rating.value = 1;
     data.forEach(user => {
-        if (log.value === user.email) {
+        if (log.value.toLowerCase() === user.username.toLowerCase()) {
             // rating.disabled = false;
             // review.disabled = false;
             submit.disabled = false;

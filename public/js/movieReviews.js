@@ -11,7 +11,7 @@ const revealReviews = (evt) => {
 }
 
 for (let i = 0; i < conatiner.childNodes.length; i++) {
-    conatiner.childNodes[i].childNodes[0].onclick = revealReviews;
+    // conatiner.childNodes[i].childNodes[0].onclick = revealReviews;
 }
 
 // Slider Functionality
