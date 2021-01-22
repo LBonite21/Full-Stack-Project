@@ -1,6 +1,15 @@
-block content
     header
         h1(class="page_title") Register
+        link(href="style.css" rel="stylesheet")
+
+    div(id="navBar")
+        ul
+            li
+                a(href="/" class="nav_item") Home
+            li
+                a(href="/moviePage" class="nav_item") Search A Movie
+            li
+                a(href="/signup" class="nav_item") Login
     section(class="main_area")
         p(class="error_label") #{errmsg}
         form(action="/register" method="POST" class="form")

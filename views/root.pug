@@ -6,13 +6,13 @@ html
         div(id="navBar")
             ul
                 li
-                    h3 Home
+                    a(href="/" class="nav_item") Home
                 li
-                    h3 Search Movie
+                    a(href="/moviePage" class="nav_item") Search A Movie
                 li
-                    h3 Login
+                    a(href="/signup" class="nav_item") Login
         form(id="movieReviewForm" method="POST")
-            p Email:
+            p Username:
                 input(id="emailInput" name="username" type="text" placeholder="LoganT")
             br
             p Password: 
