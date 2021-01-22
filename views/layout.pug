@@ -1,6 +1,5 @@
 extends moviePage
 
-
 block content
     if movieList.actor
         each movie in movieList
@@ -44,7 +43,6 @@ block content
                                     p #{review.review.review}
                                     img(src=`img/star_rating_${review.review.rating}.png`)
                                     p Reviewed by #{review.name}
-
                 
     if movieList.title
         each movie in movieList

@@ -12,6 +12,8 @@ mdb.on("error", console.error.bind(console, "connection error:"));
 mdb.once("open", function (callback) {});
 
 var accountSchema = mongoose.Schema({
+  isAdmin: Boolean,
+  username: String,
   fname: String,
   lname: String,
   street: String,
@@ -27,10 +29,6 @@ var accountSchema = mongoose.Schema({
 var Account = mongoose.model("accounts", accountSchema);
 
 let genres = "https://api.themoviedb.org/3/genre/movie/list?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US"; 
-
-const returnGenreId = genreName => {
-  
-}
 
 exports.root = (req, res) => {
   Account.find((err, accounts) => {
@@ -67,7 +65,7 @@ exports.moviePageSearch = (req, res) => {
       }
     });
 
-    console.log(r)
+    // console.log(r)
   });
 
   // Use search terms to get API data back.
@@ -164,7 +162,11 @@ exports.moviePageSearch = (req, res) => {
 }
 
 exports.login = (req, res) => {
-  Account.findOne({email : req.body.email}, (err, account) => {
+  let userName = req.body.username.toLowerCase();
+  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+  userName = userName.slice(0,-1) + userName[userName.length - 1].toUpperCase();
+
+  Account.findOne({username : userName}, (err, account) => {
     if (err) throw err;
     bcrypt.compare(req.body.password, account.password, (err, response) => {
       if (err) console.log(err);
@@ -180,6 +182,10 @@ exports.login = (req, res) => {
       }
     });
   });
+}
+
+exports.signup = (req, res) => {
+  
 }
 
 exports.test = (req, res) => {
@@ -241,4 +247,18 @@ exports.logout = (req,res) => {
           res.redirect('/');
       }
   });
+}
+
+exports.editAccount = (req, res) => {
+  Account.findOne({email: req.session.user.account.email},(err,account) => {
+    if (err) res.send(err);
+    res.render("editAccount", {
+      account: account
+    });
+  })
+
+}
+
+exports.updateAccountInfo = (req, res) => {
+
 }
