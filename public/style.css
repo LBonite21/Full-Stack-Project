@@ -2,6 +2,10 @@
     border: 1px solid black;
 }
 
+body {
+    margin: 0;
+}
+
 .parent-div {
     padding-bottom: 20px;
 }
@@ -43,6 +47,3 @@
     color: yellow;
 }
 
-body {
-    margin: 0;
-}
