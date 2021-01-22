@@ -184,6 +184,10 @@ exports.login = (req, res) => {
   });
 }
 
+exports.signup = (req, res) => {
+  
+}
+
 exports.test = (req, res) => {
   let rev = {
     review: req.body.review,
