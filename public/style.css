@@ -24,9 +24,20 @@
 }
 
 #navBar {
-    background-color: red;
+    overflow: hidden;
+    background-color: #000022;
+    /* width: 1000%; */
 }
 
-html {
-    background-color: blue;
+#navBar li {
+    list-style-type: none;
+    display: inline-block;
+    /* padding: 5px; */
+    margin-right: 12px;
+    color: #fff;
+}
+
+#navBar li:hover {
+    cursor: pointer;
+    color: yellow;
 }
