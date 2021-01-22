@@ -65,7 +65,7 @@ exports.moviePageSearch = (req, res) => {
       }
     });
 
-    console.log(r)
+    // console.log(r)
   });
 
   // Use search terms to get API data back.
@@ -246,7 +246,15 @@ exports.logout = (req,res) => {
 }
 
 exports.editAccount = (req, res) => {
-  res.render("editAccount", {
-    account: req.session.user.account
-  });
+  Account.findOne({email: req.session.user.account.email},(err,account) => {
+    if (err) res.send(err);
+    res.render("editAccount", {
+      account: account
+    });
+  })
+
+}
+
+exports.updateAccountInfo = (req, res) => {
+
 }
