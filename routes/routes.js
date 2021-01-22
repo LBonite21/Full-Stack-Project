@@ -260,5 +260,8 @@ exports.editAccount = (req, res) => {
 }
 
 exports.updateAccountInfo = (req, res) => {
-
+  
+  // Account.findOneAndUpdate({email: req.body.email}, (err,account) => {
+  //   if(err) res.send(err);
+  // })
 }
