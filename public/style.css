@@ -22,3 +22,23 @@
     justify-content: center;
     align-items: center;
 }
+
+#navBar {
+    overflow: hidden;
+    background-color: #000022;
+    /* width: 1000%; */
+}
+
+#navBar li {
+    list-style-type: none;
+    display: inline-block;
+    /* padding: 5px; */
+    margin-right: 12px;
+    color: #fff;
+    font-size: 18px;
+}
+
+#navBar li:hover {
+    cursor: pointer;
+    color: yellow;
+}
