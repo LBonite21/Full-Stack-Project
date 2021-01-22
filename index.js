@@ -33,8 +33,8 @@ let urlencodedParser = bodyParser.urlencoded({
 app.get('/', route.root);
 app.post('/', urlencodedParser, route.login);
 app.get('/moviePage', checkAuth, route.moviePage);
-app.get('/logout', route.logout);
-app.get('/editAccount', route.editAccount);
+app.get('/logout', checkAuth, route.logout);
+app.get('/editAccount', checkAuth, route.editAccount);
 app.post('/updateAccountData', urlencodedParser, route.updateAccountInfo);
 
 app.get('/signup', route.signup)
