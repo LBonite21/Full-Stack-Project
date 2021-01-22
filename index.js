@@ -36,6 +36,8 @@ app.get('/moviePage', checkAuth, route.moviePage);
 app.get('/logout', route.logout);
 app.get('/editAccount', route.editAccount);
 app.post('/updateAccountData', urlencodedParser, route.updateAccountInfo);
+
+app.post('/signupPage', urlencodedParser, route.signup)
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.post('/sendReview', urlencodedParser, route.test);
 app.post('/editReview', urlencodedParser, route.test);

@@ -1,0 +1,16 @@
+block content
+    header
+        h1(class="page_title") Register
+    section(class="main_area")
+        p(class="error_label") #{errmsg}
+        form(action="/register" method="POST" class="form")
+            input(type="text" name="email" placeholder="Email" id="email" class="form_field")
+            p(id="emailError" class="error_label")
+            input(type="text" name="username" placeholder="Username" id="username" class="form_field")
+            p(id="usernameError" class="error_label")
+            input(type="password" name="password" placeholder="Password" id="password" class="form_field") 
+            p(id="passwordError" class="error_label")
+            input(type="submit" value="Register" id="submitBtn" class="log_btn")
+        p(class="register_text") Already have an account?
+            a(class="sign_btn" href="/login") Login!
+    script(src="./js/validation.js")
