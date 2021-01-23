@@ -162,11 +162,15 @@ exports.moviePageSearch = (req, res) => {
 }
 
 exports.login = (req, res) => {
-  let userName = req.body.username.toLowerCase();
-  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-  userName = userName.slice(0,-1) + userName[userName.length - 1].toUpperCase();
+  let userName = req.body.username;
+  let lowercaseUserName = req.body.username.toLowerCase();
+  // If username format is capital first and last letter
+  lowercaseUserName = lowercaseUserName.charAt(0).toUpperCase() + lowercaseUserName.slice(1);
+  lowercaseUserName = lowercaseUserName.slice(0,-1) + lowercaseUserName[lowercaseUserName.length - 1].toUpperCase();
+  //
+  console.log(userName);
 
-  Account.findOne({username : userName}, (err, account) => {
+  Account.findOne({username : {$in: [userName, lowercaseUserName]}}, (err, account) => {
     if (err) throw err;
     bcrypt.compare(req.body.password, account.password, (err, response) => {
       if (err) console.log(err);
@@ -259,9 +263,35 @@ exports.editAccount = (req, res) => {
 
 }
 
-exports.updateAccountInfo = (req, res) => {
-  
-  // Account.findOneAndUpdate({email: req.body.email}, (err,account) => {
-  //   if(err) res.send(err);
-  // })
+exports.updateAccountInfo = (req, res) => { 
+  console.log(req.body.password);
+  bcrypt.hash(req.body.password, 10, (err,hash) => {
+    let myHash = hash;
+    Account.findOneAndUpdate(
+      { email: req.session.user.account.email },
+      { $set: { username: req.body.username, password: myHash, fname: req.body.firstName, lname: req.body.lastName, email: req.body.email, 
+        street: req.body.street, city: req.body.city, state: req.body.state, zip_code: req.body.zip_code, phone: req.body.phone } },
+      (err, data) => {
+        if (err) res.send(err);
+        console.log(data);
+        let accountReviews = req.session.user.account.reviews;
+        let isAccountAnAdmin = req.session.user.account.isAdmin;
+        req.session.user.account = {
+          isAdmin:isAccountAnAdmin,
+          username: req.body.username,
+          fname: req.body.firstName,
+          lname: req.body.lastName,
+          street: req.body.street,
+          city: req.body.city,
+          state: req.body.state,
+          zip_code: req.body.zip_code,
+          email: req.body.email,
+          password: myHash,
+          phone: req.body.phone,
+          reviews: accountReviews
+        }
+      }
+    );
+    res.redirect('/');
+  })
 }
