@@ -9,7 +9,7 @@ mongoose.connect("mongodb://localhost/fandingo");
 
 const mdb = mongoose.connection;
 mdb.on("error", console.error.bind(console, "connection error:"));
-mdb.once("open", function (callback) {});
+mdb.once("open", function (callback) { });
 
 var accountSchema = mongoose.Schema({
   isAdmin: Boolean,
@@ -28,7 +28,7 @@ var accountSchema = mongoose.Schema({
 
 var Account = mongoose.model("accounts", accountSchema);
 
-let genres = "https://api.themoviedb.org/3/genre/movie/list?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US"; 
+let genres = "https://api.themoviedb.org/3/genre/movie/list?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US";
 
 exports.root = (req, res) => {
   Account.find((err, accounts) => {
@@ -74,7 +74,7 @@ exports.moviePageSearch = (req, res) => {
   let actor_search;
   let title = req.body.title;
   let actor = req.body.actor;
-  let genreId; 
+  let genreId;
 
 
   // Priorities TITLE as a search and then GENRE and then ACTORS
@@ -99,7 +99,7 @@ exports.moviePageSearch = (req, res) => {
     request.send();
   }
   if (actor) {
-    actor_search  = `https://api.themoviedb.org/3/search/person?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&query=${encodeURI(actor)}&page=1&include_adult=false&media_type=movie`;
+    actor_search = `https://api.themoviedb.org/3/search/person?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&query=${encodeURI(actor)}&page=1&include_adult=false&media_type=movie`;
     let request = new XMLHttpRequest();
 
     request.open('GET', actor_search, true);
@@ -133,7 +133,7 @@ exports.moviePageSearch = (req, res) => {
           if (genre.name.toLowerCase() == req.body.genre.toLowerCase()) {
             genreId = genre.id;
             genre_search = `https://api.themoviedb.org/3/discover/movie?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${encodeURI(genreId)}`;
-          
+
             request2.open('GET', genre_search, true);
 
             request2.onload = () => {
@@ -158,10 +158,17 @@ exports.moviePageSearch = (req, res) => {
 
     request.send();
   }
-  
+
 }
 
 exports.login = (req, res) => {
+<<<<<<< HEAD
+  let userName = req.body.username.toLowerCase();
+  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+  userName = userName.slice(0, -1) + userName[userName.length - 1].toUpperCase();
+
+  Account.findOne({ username: userName }, (err, account) => {
+=======
   let userName = req.body.username;
   let lowercaseUserName = req.body.username.toLowerCase();
   // If username format is capital first and last letter
@@ -171,10 +178,11 @@ exports.login = (req, res) => {
   console.log(userName);
 
   Account.findOne({username : {$in: [userName, lowercaseUserName]}}, (err, account) => {
+>>>>>>> 6a2d8d87260c86e1443e8fb66b3e70274c06ec0d
     if (err) throw err;
     bcrypt.compare(req.body.password, account.password, (err, response) => {
       if (err) console.log(err);
-      
+
       if (response) {
         req.session.user = {
           isAuthenticated: true,
@@ -189,7 +197,29 @@ exports.login = (req, res) => {
 }
 
 exports.signup = (req, res) => {
-  
+  res.render('signup');
+}
+
+exports.createAccount = (req, res) => {
+  let body = req.body;
+  bcrypt.hash(body.password, 10, (err, response) => {
+    if (err) console.log(err);
+    let user = new Account({
+      email: `${body.email}`,
+      username: `${body.username}`,
+      password: `${response}`,
+    });
+    user.save((err, person) => {
+      if (err) {
+        res.render("signup", {
+            errmsg: "Error"
+        });
+    } else {
+        res.redirect("/");
+    }
+      console.log(`${body.username} added`);
+    });
+  });
 }
 
 exports.test = (req, res) => {
@@ -200,18 +230,18 @@ exports.test = (req, res) => {
   };
   let reviewedMovieBefore = false;
 
-  Account.find({email: req.session.user.account.email},(err,account) => {
-    if(err) throw err;
+  Account.find({ email: req.session.user.account.email }, (err, account) => {
+    if (err) throw err;
     console.log(account)
     account[0].reviews.forEach(review => {
-      if(review.movieId == rev.movieId){
+      if (review.movieId == rev.movieId) {
         reviewedMovieBefore = true;
       }
     });
-    if(reviewedMovieBefore){
+    if (reviewedMovieBefore) {
       let reviews = account[0].reviews;
       reviews.forEach(review => {
-        if(review.movieId == rev.movieId){
+        if (review.movieId == rev.movieId) {
           review.rating = rev.rating;
           review.review = rev.review;
         }
@@ -225,7 +255,7 @@ exports.test = (req, res) => {
         }
       );
     }
-    else{      
+    else {
       Account.findOneAndUpdate(
         { email: req.session.user.account.email },
         { $push: { reviews: rev } },
@@ -243,18 +273,18 @@ exports.test = (req, res) => {
 
 };
 
-exports.logout = (req,res) => {
+exports.logout = (req, res) => {
   req.session.destroy(err => {
-      if(err) {
-          console.log(err);
-      } else {
-          res.redirect('/');
-      }
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect('/');
+    }
   });
 }
 
 exports.editAccount = (req, res) => {
-  Account.findOne({email: req.session.user.account.email},(err,account) => {
+  Account.findOne({ email: req.session.user.account.email }, (err, account) => {
     if (err) res.send(err);
     res.render("editAccount", {
       account: account
