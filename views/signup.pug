@@ -1,5 +1,4 @@
 header
-    h1(class="page_title") Register
     link(href="style.css" rel="stylesheet")
 
 div(id="navBar")
@@ -10,6 +9,7 @@ div(id="navBar")
             a(href="/moviePage" class="nav_item") Search A Movie
         li
             a(href="/signup" class="nav_item") Login
+h1(class="page_title") Register
 section(class="main_area")
     p(class="error_label") #{errmsg}
     form(action="/signup" method="POST" class="form")

@@ -94,6 +94,7 @@ ul {
 #navBar {
     overflow: hidden;
     background-color: #92B0E3;
+    margin: 0;
 }
 
 #navBar li {
@@ -101,15 +102,20 @@ ul {
     display: inline-block;
     /* padding: 5px; */
     margin-right: 30px;
-    color: #fff;
+    color: black;
     font-size: 18px;
 }
 
+#navBar a {
+    text-decoration: none;
+    color: inherit;
+}
 
-#navBar li:hover {
+#navBar a:hover {
     cursor: pointer;
     color: yellow;
 }
+
 
 .box {
     border: 1px solid black;
@@ -135,3 +141,7 @@ ul {
     justify-content: center;
     align-items: center;
 }
+
+/* yeah, you set the margin and padding to 0
+on nav,body,html */
+
