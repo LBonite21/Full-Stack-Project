@@ -265,3 +265,34 @@ exports.updateAccountInfo = (req, res) => {
   //   if(err) res.send(err);
   // })
 }
+
+exports.adminPage = (req, res) => {
+  if (req.session.user.account.isAdmin) {
+    Account.find((err, accounts) => {
+      if (err) res.redirect('/');
+      res.render('admin', {
+        accounts,
+      });
+    });
+  }
+}
+exports.deleteAccount = (req, res) => {
+  Account.deleteOne({email: req.body.email})
+  .then( () => {
+    console.log(`${req.body.email} was deleted`);
+    res.redirect('/');
+  })
+  .catch( (err) => {
+    console.log(err);
+  });
+}
+exports.deleteReview = (req, res) => {
+  Account.updateOne({email: req.body.email}, {$pull: { "reviews": { "movieId" : req.body.movieId }}}, { safe: true, multi:true })
+  .then( () => {
+    console.log(`${req.body.movieId} was deleted`);
+    res.redirect('/');
+  })
+  .catch( (err) => {
+    console.log(err);
+  });
+}
