@@ -41,6 +41,7 @@ app.get('/signup', route.signup)
 
 app.post('/deleteAccount', urlencodedParser, route.deleteAccount);
 app.post('/deleteReview', urlencodedParser, route.deleteReview);
+app.post('/signup', urlencodedParser, route.createAccount);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.post('/sendReview', urlencodedParser, route.test);
 app.post('/editReview', urlencodedParser, route.test);
