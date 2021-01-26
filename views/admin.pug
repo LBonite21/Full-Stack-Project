@@ -17,6 +17,15 @@ div(class='admin-container')
                     input(type='text' name='email' value=account.email hidden) 
                     p #{account.phone}
                     input(type="submit" value='Delete Account')
+                if !account.isAdmin
+                    form(method='post' action='/makeAdmin')
+                        input(type='text' name='email' value=account.email hidden)
+                        input(type="submit" value='Make Admin')
+                else 
+                    form(method='post' action='/makeNotAdmin')
+                        input(type='text' name='email' value=account.email hidden)
+                        input(type="submit" value='Make Not Admin')
+
 
     div(class='review-list')
         each account in accounts

@@ -57,7 +57,7 @@ exports.moviePageSearch = (req, res) => {
         user.reviews.forEach(rev => {
           let object = {
             review: rev,
-            name: `${user.fname}${user.lname[0]}`,
+            name: user.username,
             email: user.email
           }
           r.push(object);
@@ -322,7 +322,7 @@ exports.updateAccountInfo = (req, res) => {
     Account.findOneAndUpdate(
       { email: req.session.user.account.email },
       { $set: { username: req.body.username, password: myHash, fname: req.body.firstName, lname: req.body.lastName, email: req.body.email, 
-        street: req.body.street, city: req.body.city, state: req.body.state, zip_code: req.body.zip_code, phone: req.body.phone } },
+        street: req.body.street, city: req.body.city, state: req.body.state, zip_code: req.body.zipCode, phone: req.body.phone } },
       (err, data) => {
         if (err) res.send(err);
         console.log(data);
@@ -336,7 +336,7 @@ exports.updateAccountInfo = (req, res) => {
           street: req.body.street,
           city: req.body.city,
           state: req.body.state,
-          zip_code: req.body.zip_code,
+          zip_code: req.body.zipCode,
           email: req.body.email,
           password: myHash,
           phone: req.body.phone,
@@ -346,4 +346,26 @@ exports.updateAccountInfo = (req, res) => {
     );
     res.redirect('/');
   })
+}
+exports.makeAdmin = (req, res) => {
+  Account.updateOne({email: req.body.email}, { isAdmin: true })
+  .then( () => {
+    console.log(`${req.body.email} is admin.`);
+    req.session.user.account.isAdmin = true;
+    res.redirect('/');
+  })
+  .catch( (err) => {
+    console.log(err);
+  });
+}
+exports.makeNotAdmin = (req, res) => {
+  Account.updateOne({email: req.body.email}, { isAdmin: false })
+  .then( () => {
+    console.log(`${req.body.email} is not admin.`);
+    req.session.user.account.isAdmin = false;
+    res.redirect('/');
+  })
+  .catch( (err) => {
+    console.log(err);
+  });
 }

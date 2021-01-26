@@ -40,6 +40,8 @@ app.post('/updateAccountData', urlencodedParser, route.updateAccountInfo);
 app.get('/signup', route.signup)
 
 app.post('/deleteAccount', urlencodedParser, route.deleteAccount);
+app.post('/makeAdmin', urlencodedParser, route.makeAdmin);
+app.post('/makeNotAdmin', urlencodedParser, route.makeNotAdmin);
 app.post('/deleteReview', urlencodedParser, route.deleteReview);
 app.post('/signup', urlencodedParser, route.createAccount);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
