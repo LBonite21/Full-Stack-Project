@@ -134,3 +134,12 @@ ul {
     justify-content: center;
     align-items: center;
 }
+
+.admin-container {
+    display: flex;
+    flex-direction: row;
+}
+.user-list, .review-list {
+    display: flex;
+    flex-direction: column;
+}

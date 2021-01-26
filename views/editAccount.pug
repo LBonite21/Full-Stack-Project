@@ -1,5 +1,8 @@
 a(href='/moviePage')
     button Go Back
+if account.isAdmin
+    a(href='/adminPage')
+        button Visit Admin Page
 
 form(method='post' action='/updateAccountData' name="editAccountForm" onsubmit="return verifyUpdateAccount()")
     label(for="username") Username

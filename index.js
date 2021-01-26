@@ -20,7 +20,6 @@ const checkAuth = (req,res,next) => {
     }
 };
 
-
 app.set('view engine', 'pug');
 app.set('views', __dirname+'/views');
 
@@ -35,9 +34,13 @@ app.post('/', urlencodedParser, route.login);
 app.get('/moviePage', checkAuth, route.moviePage);
 app.get('/logout', checkAuth, route.logout);
 app.get('/editAccount', checkAuth, route.editAccount);
+app.get('/adminPage', checkAuth, route.adminPage);
 app.post('/updateAccountData', urlencodedParser, route.updateAccountInfo);
 
 app.get('/signup', route.signup)
+
+app.post('/deleteAccount', urlencodedParser, route.deleteAccount);
+app.post('/deleteReview', urlencodedParser, route.deleteReview);
 app.post('/signup', urlencodedParser, route.createAccount);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.post('/sendReview', urlencodedParser, route.test);
