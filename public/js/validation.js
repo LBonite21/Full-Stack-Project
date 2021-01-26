@@ -57,6 +57,6 @@ const finalVerify = (evt) => {
 
 document.getElementById("submitBtn").addEventListener('click', finalVerify);
 
-for(let field of document.getElementsByClassName("form_field")){
+for(let field of document.getElementsByClassName("signup_field")){
     field.addEventListener('input', activeVerify);
 }

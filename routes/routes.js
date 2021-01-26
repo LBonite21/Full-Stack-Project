@@ -162,13 +162,6 @@ exports.moviePageSearch = (req, res) => {
 }
 
 exports.login = (req, res) => {
-<<<<<<< HEAD
-  let userName = req.body.username.toLowerCase();
-  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-  userName = userName.slice(0, -1) + userName[userName.length - 1].toUpperCase();
-
-  Account.findOne({ username: userName }, (err, account) => {
-=======
   let userName = req.body.username;
   let lowercaseUserName = req.body.username.toLowerCase();
   // If username format is capital first and last letter
@@ -178,7 +171,6 @@ exports.login = (req, res) => {
   console.log(userName);
 
   Account.findOne({username : {$in: [userName, lowercaseUserName]}}, (err, account) => {
->>>>>>> 6a2d8d87260c86e1443e8fb66b3e70274c06ec0d
     if (err) throw err;
     bcrypt.compare(req.body.password, account.password, (err, response) => {
       if (err) console.log(err);
