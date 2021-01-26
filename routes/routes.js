@@ -314,6 +314,7 @@ exports.deleteReview = (req, res) => {
   .catch( (err) => {
     console.log(err);
   });
+}
 exports.updateAccountInfo = (req, res) => { 
   console.log(req.body.password);
   bcrypt.hash(req.body.password, 10, (err,hash) => {
