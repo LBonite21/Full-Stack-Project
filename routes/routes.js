@@ -166,11 +166,11 @@ exports.login = (req, res) => {
   let lowercaseUserName = req.body.username.toLowerCase();
   // If username format is capital first and last letter
   lowercaseUserName = lowercaseUserName.charAt(0).toUpperCase() + lowercaseUserName.slice(1);
-  lowercaseUserName = lowercaseUserName.slice(0,-1) + lowercaseUserName[lowercaseUserName.length - 1].toUpperCase();
+  lowercaseUserName = lowercaseUserName.slice(0, -1) + lowercaseUserName[lowercaseUserName.length - 1].toUpperCase();
   //
   console.log(userName);
 
-  Account.findOne({username : {$in: [userName, lowercaseUserName]}}, (err, account) => {
+  Account.findOne({ username: { $in: [userName, lowercaseUserName] } }, (err, account) => {
     if (err) throw err;
     bcrypt.compare(req.body.password, account.password, (err, response) => {
       if (err) console.log(err);
@@ -204,15 +204,37 @@ exports.createAccount = (req, res) => {
     user.save((err, person) => {
       if (err) {
         res.render("signup", {
-            errmsg: "Error"
+          errmsg: "Error"
         });
-    } else {
+      } else {
         res.redirect("/");
-    }
+      }
       console.log(`${body.username} added`);
     });
   });
 }
+
+// exports.handleSend = (req, res) => {
+//   const secret_key = process.env.SECRET_KEY;
+//   const token = req.body.token;
+//   const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+
+//   let xmlhttp = new XMLHttpRequest();
+
+//   xmlhttp.onload = function () {
+//     let result = JSON.stringify(xmlhttp.response);
+//     console.log(result);
+//   };
+//   xmlhttp.open("POST", url, true);
+//   xmlhttp.send();
+
+//   // fetch(url, {
+//   //   method: 'post'
+//   // })
+//   //   .then(response => response.json())
+//   //   .then(google_response => res.json({ google_response }))
+//   //   .catch(error => res.json({ error }));
+// };
 
 exports.test = (req, res) => {
   let rev = {
@@ -296,40 +318,44 @@ exports.adminPage = (req, res) => {
   }
 }
 exports.deleteAccount = (req, res) => {
-  Account.deleteOne({email: req.body.email})
-  .then( () => {
-    console.log(`${req.body.email} was deleted`);
-    res.redirect('/');
-  })
-  .catch( (err) => {
-    console.log(err);
-  });
+  Account.deleteOne({ email: req.body.email })
+    .then(() => {
+      console.log(`${req.body.email} was deleted`);
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 exports.deleteReview = (req, res) => {
-  Account.updateOne({email: req.body.email}, {$pull: { "reviews": { "movieId" : req.body.movieId }}}, { safe: true, multi:true })
-  .then( () => {
-    console.log(`${req.body.movieId} was deleted`);
-    res.redirect('/');
-  })
-  .catch( (err) => {
-    console.log(err);
-  });
+  Account.updateOne({ email: req.body.email }, { $pull: { "reviews": { "movieId": req.body.movieId } } }, { safe: true, multi: true })
+    .then(() => {
+      console.log(`${req.body.movieId} was deleted`);
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
-exports.updateAccountInfo = (req, res) => { 
+exports.updateAccountInfo = (req, res) => {
   console.log(req.body.password);
-  bcrypt.hash(req.body.password, 10, (err,hash) => {
+  bcrypt.hash(req.body.password, 10, (err, hash) => {
     let myHash = hash;
     Account.findOneAndUpdate(
       { email: req.session.user.account.email },
-      { $set: { username: req.body.username, password: myHash, fname: req.body.firstName, lname: req.body.lastName, email: req.body.email, 
-        street: req.body.street, city: req.body.city, state: req.body.state, zip_code: req.body.zipCode, phone: req.body.phone } },
+      {
+        $set: {
+          username: req.body.username, password: myHash, fname: req.body.firstName, lname: req.body.lastName, email: req.body.email,
+          street: req.body.street, city: req.body.city, state: req.body.state, zip_code: req.body.zipCode, phone: req.body.phone
+        }
+      },
       (err, data) => {
         if (err) res.send(err);
         console.log(data);
         let accountReviews = req.session.user.account.reviews;
         let isAccountAnAdmin = req.session.user.account.isAdmin;
         req.session.user.account = {
-          isAdmin:isAccountAnAdmin,
+          isAdmin: isAccountAnAdmin,
           username: req.body.username,
           fname: req.body.firstName,
           lname: req.body.lastName,
@@ -348,24 +374,24 @@ exports.updateAccountInfo = (req, res) => {
   })
 }
 exports.makeAdmin = (req, res) => {
-  Account.updateOne({email: req.body.email}, { isAdmin: true })
-  .then( () => {
-    console.log(`${req.body.email} is admin.`);
-    req.session.user.account.isAdmin = true;
-    res.redirect('/');
-  })
-  .catch( (err) => {
-    console.log(err);
-  });
+  Account.updateOne({ email: req.body.email }, { isAdmin: true })
+    .then(() => {
+      console.log(`${req.body.email} is admin.`);
+      req.session.user.account.isAdmin = true;
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 exports.makeNotAdmin = (req, res) => {
-  Account.updateOne({email: req.body.email}, { isAdmin: false })
-  .then( () => {
-    console.log(`${req.body.email} is not admin.`);
-    req.session.user.account.isAdmin = false;
-    res.redirect('/');
-  })
-  .catch( (err) => {
-    console.log(err);
-  });
+  Account.updateOne({ email: req.body.email }, { isAdmin: false })
+    .then(() => {
+      console.log(`${req.body.email} is not admin.`);
+      req.session.user.account.isAdmin = false;
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
