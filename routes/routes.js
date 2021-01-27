@@ -404,8 +404,8 @@ exports.processSendEmailForPassword = (req,res) => {
       
         // send mail with defined transport object
         let info = await transporter.sendMail({
-          from: "ltyler@student.neumont.edu", // list of receivers
-          to: 'ltyler@student.neumont.edu', // sender address
+          from: "", // OUTLOOK EMAIL HERE ----------------------------------------------------------------------------------------------------
+          to: '', // OUTLOOK EMAIL HERE ----------------------------------------------------------------------------------------------------
           subject: "Movie Review Forgot Password", // Subject line
           text: "Click on the link to reset your password", // plain text body
           html: `<p>Click on the attached link to reset your password.</p>
