@@ -36,7 +36,6 @@ app.get('/logout', checkAuth, route.logout);
 app.get('/editAccount', checkAuth, route.editAccount);
 app.get('/adminPage', checkAuth, route.adminPage);
 app.post('/updateAccountData', urlencodedParser, route.updateAccountInfo);
-
 app.get('/signup', route.signup)
 
 app.post('/deleteAccount', urlencodedParser, route.deleteAccount);
@@ -47,6 +46,10 @@ app.post('/signup', urlencodedParser, route.createAccount);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.post('/sendReview', urlencodedParser, route.test);
 app.post('/editReview', urlencodedParser, route.test);
+
+app.get('/forgotPasswordSendEmail', route.sendEmailForPassword);
+app.post('/forgotPasswordSendEmail', urlencodedParser, route.processSendEmailForPassword);
+app.get('/reset', route.resetPasswordPage)
 app.get('/:excess', route.root)
 
 app.listen(3000);

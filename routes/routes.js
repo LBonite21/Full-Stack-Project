@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const { text, json } = require("body-parser");
 const e = require("express");
+const nodemailer = require("nodemailer");
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 const mongoose = require("mongoose");
@@ -295,6 +296,7 @@ exports.adminPage = (req, res) => {
     });
   }
 }
+
 exports.deleteAccount = (req, res) => {
   Account.deleteOne({email: req.body.email})
   .then( () => {
@@ -305,6 +307,7 @@ exports.deleteAccount = (req, res) => {
     console.log(err);
   });
 }
+
 exports.deleteReview = (req, res) => {
   Account.updateOne({email: req.body.email}, {$pull: { "reviews": { "movieId" : req.body.movieId }}}, { safe: true, multi:true })
   .then( () => {
@@ -315,6 +318,7 @@ exports.deleteReview = (req, res) => {
     console.log(err);
   });
 }
+
 exports.updateAccountInfo = (req, res) => { 
   console.log(req.body.password);
   bcrypt.hash(req.body.password, 10, (err,hash) => {
@@ -347,6 +351,7 @@ exports.updateAccountInfo = (req, res) => {
     res.redirect('/');
   })
 }
+
 exports.makeAdmin = (req, res) => {
   Account.updateOne({email: req.body.email}, { isAdmin: true })
   .then( () => {
@@ -358,6 +363,7 @@ exports.makeAdmin = (req, res) => {
     console.log(err);
   });
 }
+
 exports.makeNotAdmin = (req, res) => {
   Account.updateOne({email: req.body.email}, { isAdmin: false })
   .then( () => {
@@ -368,4 +374,63 @@ exports.makeNotAdmin = (req, res) => {
   .catch( (err) => {
     console.log(err);
   });
+}
+
+exports.sendEmailForPassword = (req,res) => {
+  res.render('forgotPasswordSendEmail', {
+    failedEmailAttempt: false
+  })
+}
+
+exports.processSendEmailForPassword = (req,res) => {
+  // res.redirect('/')
+  Account.findOne({email: req.body.email}, (err, account) => {
+    if(account) {
+      async function main() {
+        // Generate test SMTP service account from ethereal.email
+        // Only needed if you don't have a real mail account for testing
+        let testAccount = await nodemailer.createTestAccount();
+      
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+          host: "smtp.office365.com",
+          port: 587,
+          secure: false, // true for 465, false for other ports
+          auth: {
+            user: '', // OUTLOOK EMAIL HERE ----------------------------------------------------------------------------------------------------
+            pass: '', // OUTLOOK PASSWORD HERE
+          },
+        });
+      
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+          from: "ltyler@student.neumont.edu", // list of receivers
+          to: 'ltyler@student.neumont.edu', // sender address
+          subject: "Movie Review Forgot Password", // Subject line
+          text: "Click on the link to reset your password", // plain text body
+          html: `<p>Click on the attached link to reset your password.</p>
+          <a href="localhost:3000/reset">Reset Password Here!</a>`, // html body
+        });
+      
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+      
+        // Preview only available when sending through an Ethereal account
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+      }
+      
+      main().catch(console.error)
+      .then(res.redirect('/'));
+    }
+    else {
+      res.render('forgotPasswordSendEmail', {
+        failedEmailAttempt: true
+      })
+    }
+  })
+}
+
+exports.resetPasswordPage = (req,res) => {
+  res.render('reset')
 }
