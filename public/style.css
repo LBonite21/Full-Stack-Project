@@ -142,6 +142,11 @@ ul {
     align-items: center;
 }
 
-/* yeah, you set the margin and padding to 0
-on nav,body,html */
-
+.admin-container {
+    display: flex;
+    flex-direction: row;
+}
+.user-list, .review-list {
+    display: flex;
+    flex-direction: column;
+}
