@@ -61,6 +61,10 @@ app.post('/signup', urlencodedParser, route.createAccount);
 app.post('/moviePage', urlencodedParser, route.moviePageSearch);
 app.post('/sendReview', urlencodedParser, route.test);
 app.post('/editReview', urlencodedParser, route.test);
+
+app.get('/forgotPasswordSendEmail', route.sendEmailForPassword);
+app.post('/forgotPasswordSendEmail', urlencodedParser, route.processSendEmailForPassword);
+app.get('/reset', route.resetPasswordPage)
 app.get('/:excess', route.root)
 
 app.listen(3000);
