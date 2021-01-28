@@ -25,9 +25,16 @@ function handleClick(token) {
     }
 }
 
-grecaptcha.ready(function () {
-    grecaptcha.execute('6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY', { action: 'demo' })
-        .then(function (token) {
-            document.querySelector('#submitBtn').addEventListener('click', handleClick(token));
-        });
-});
+var verifyCallback = function (response) {
+    alert(response);
+};
+var widgetId1;
+
+var onloadCallback = function () {
+    // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
+    // The id of the reCAPTCHA widget is assigned to 'widgetId1'.
+    widgetId1 = grecaptcha.render('result', {
+        'sitekey': '6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ',
+        'theme': 'light'
+    });
+};

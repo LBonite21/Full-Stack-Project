@@ -1,6 +1,6 @@
 header
     h1(class="page_title") Register
-    script(src="https://www.google.com/recaptcha/api.js?render=6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY")
+    script(src="https://www.google.com/recaptcha/api.js")
     link(href="style.css" rel="stylesheet")
 
 div(id="navBar")
@@ -21,7 +21,8 @@ section(class="main_area")
         input(type="password" name="password" placeholder="Password" id="password" class="signup_field") 
         p(id="passwordError" class="error_label")
         div(id="result")
-        input(type="submit" value="Register" id="submitBtn" class="g-recaptcha log_btn" data-sitekey="6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY" data-action='submit')
+        <div class="g-recaptcha" data-sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"></div>
+        input(type="submit" value="Register" id="submitBtn" class="log_btn")
     p(class="register_text") Already have an account?
         a(class="sign_btn" href="/login") Login!
 script(src="./js/validation.js")

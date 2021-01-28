@@ -37,21 +37,7 @@ app.get('/editAccount', checkAuth, route.editAccount);
 app.get('/adminPage', checkAuth, route.adminPage);
 app.get('/signup', route.signup);
 
-
-const handleSend = (req, res) => {
-    const secret_key = process.env.SECRET_KEY;
-    const token = req.body.token;
-    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
-
-    fetch(url, {
-        method: 'post'
-    })
-        .then(response => response.json())
-        .then(google_response => res.json({ google_response }))
-        .catch(error => res.json({ error }));
-};
-
-app.post('/signup', handleSend)
+app.post('/signup', route.handleSend);
 app.post('/updateAccountData', urlencodedParser, route.updateAccountInfo);
 app.post('/deleteAccount', urlencodedParser, route.deleteAccount);
 app.post('/makeAdmin', urlencodedParser, route.makeAdmin);
@@ -65,6 +51,7 @@ app.post('/editReview', urlencodedParser, route.test);
 app.get('/forgotPasswordSendEmail', route.sendEmailForPassword);
 app.post('/forgotPasswordSendEmail', urlencodedParser, route.processSendEmailForPassword);
 app.get('/reset', route.resetPasswordPage)
+app.post('/reset', urlencodedParser, route.processResetPassword)
 app.get('/:excess', route.root)
 
 app.listen(3000);
