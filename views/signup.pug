@@ -1,4 +1,6 @@
 header
+    h1(class="page_title") Register
+    script(src="https://www.google.com/recaptcha/api.js?render=6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY")
     link(href="style.css" rel="stylesheet")
 
 div(id="navBar")
@@ -9,7 +11,6 @@ div(id="navBar")
             a(href="/moviePage" class="nav_item") Search A Movie
         li
             a(href="/signup" class="nav_item") Login
-h1(class="page_title") Register
 section(class="main_area")
     p(class="error_label") #{errmsg}
     form(action="/signup" method="POST" class="form")
@@ -19,7 +20,9 @@ section(class="main_area")
         p(id="usernameError" class="error_label")
         input(type="password" name="password" placeholder="Password" id="password" class="signup_field") 
         p(id="passwordError" class="error_label")
-        input(type="submit" value="Register" id="submitBtn" class="log_btn")
+        div(id="result")
+        input(type="submit" value="Register" id="submitBtn" class="g-recaptcha log_btn" data-sitekey="6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY" data-action='submit')
     p(class="register_text") Already have an account?
         a(class="sign_btn" href="/login") Login!
 script(src="./js/validation.js")
+script(src="./js/captcha.js")
