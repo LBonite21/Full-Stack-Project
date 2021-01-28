@@ -215,27 +215,34 @@ exports.createAccount = (req, res) => {
   });
 }
 
-// exports.handleSend = (req, res) => {
-//   const secret_key = process.env.SECRET_KEY;
-//   const token = req.body.token;
-//   const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+exports.handleSend = (req, res) => {
+  const secret_key = "6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida";
+  const token = req.body.token;
+  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
 
-//   let xmlhttp = new XMLHttpRequest();
+  let xmlhttp = new XMLHttpRequest();
 
-//   xmlhttp.onload = function () {
-//     let result = JSON.stringify(xmlhttp.response);
-//     console.log(result);
-//   };
-//   xmlhttp.open("POST", url, true);
-//   xmlhttp.send();
+  xmlhttp.onload = function () {
+    let result = JSON.stringify(xmlhttp.response);
+    console.log(result);
 
-//   // fetch(url, {
-//   //   method: 'post'
-//   // })
-//   //   .then(response => response.json())
-//   //   .then(google_response => res.json({ google_response }))
-//   //   .catch(error => res.json({ error }));
-// };
+    if(result.success !== undefined && !body.success) {
+      return res.json({"responseError" : "Failed captcha verification"});
+    }
+    else {
+      res.json({"responseSuccess" : "Sucess"});
+    }
+  };
+  xmlhttp.open("POST", url, true);
+  xmlhttp.send();
+
+  // fetch(url, {
+  //   method: 'post'
+  // })
+  //   .then(response => response.json())
+  //   .then(google_response => res.json({ google_response }))
+  //   .catch(error => res.json({ error }));
+};
 
 exports.test = (req, res) => {
   let rev = {
