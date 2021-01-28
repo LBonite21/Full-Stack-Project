@@ -65,6 +65,7 @@ app.post('/editReview', urlencodedParser, route.test);
 app.get('/forgotPasswordSendEmail', route.sendEmailForPassword);
 app.post('/forgotPasswordSendEmail', urlencodedParser, route.processSendEmailForPassword);
 app.get('/reset', route.resetPasswordPage)
+app.post('/reset', urlencodedParser, route.processResetPassword)
 app.get('/:excess', route.root)
 
 app.listen(3000);
