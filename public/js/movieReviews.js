@@ -28,8 +28,10 @@ const verifySamePassword = () => {
     }
 }
 
+passwordReentryInput.addEventListener('input', verifySamePassword);
+
 const verifyUpdateAccount = () => {
-    for(input in editAccount) {
+    for(input in editAccountForm) {
         if(input.value.trim() === "") {
             return false
         }
