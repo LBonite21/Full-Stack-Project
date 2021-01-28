@@ -13,7 +13,7 @@ div(id="navBar")
             a(href="/signup" class="nav_item") Login
 section(class="main_area")
     p(class="error_label") #{errmsg}
-    form(action="/signup" method="POST" class="form")
+    form(action="/signup" method="POST" class="form" id='demo-form')
         input(type="text" name="email" placeholder="Email" id="email" class="signup_field")
         p(id="emailError" class="error_label")
         input(type="text" name="username" placeholder="Username" id="username" class="signup_field")
@@ -21,7 +21,9 @@ section(class="main_area")
         input(type="password" name="password" placeholder="Password" id="password" class="signup_field") 
         p(id="passwordError" class="error_label")
         div(id="result")
-        input(type="submit" value="Register" id="submitBtn" class="g-recaptcha log_btn" data-sitekey="6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY" data-action='submit')
+        input(type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" value='')
+        input(type="submit" value="Verify" id="submitBtn" class="g-recaptcha" data-sitekey="6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY" data-action='submit' data-callback='onClick')
+        input(type="submit" value="Register" id='register' hidden)
     p(class="register_text") Already have an account?
         a(class="sign_btn" href="/login") Login!
 script(src="./js/validation.js")

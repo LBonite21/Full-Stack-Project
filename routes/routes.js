@@ -215,6 +215,12 @@ exports.createAccount = (req, res) => {
   });
 }
 
+exports.handleCaptcha = (req, res) => {
+  let token = req.body['g-recaptcha-response']
+
+  console.log(token);
+}
+
 // exports.handleSend = (req, res) => {
 //   const secret_key = process.env.SECRET_KEY;
 //   const token = req.body.token;
