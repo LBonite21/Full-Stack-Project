@@ -1,9 +1,7 @@
-//Site key: 6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY
-//Secret key: 6LcxZTwaAAAAAMcVsKBwKLRYJNNzte1OBL8L7fXN
+//Site key: 6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ
+//Secret key: 6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida
 
-function showResult(text) {
-    document.querySelector('#result').innerHTML = text;
-}
+var widgetId1;
 
 function handleClick(token) {
     return function () {
@@ -26,15 +24,16 @@ function handleClick(token) {
 }
 
 var verifyCallback = function (response) {
-    alert(response);
+    alert(response)
 };
-var widgetId1;
-
 var onloadCallback = function () {
-    // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
-    // The id of the reCAPTCHA widget is assigned to 'widgetId1'.
     widgetId1 = grecaptcha.render('result', {
         'sitekey': '6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ',
         'theme': 'light'
+    });
+    grecaptcha.ready(function () {
+        grecaptcha.execute('6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ', { action: 'signup' })
+            .then(function (token) {
+            });
     });
 };

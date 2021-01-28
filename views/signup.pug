@@ -1,6 +1,5 @@
 header
     h1(class="page_title") Register
-    script(src="https://www.google.com/recaptcha/api.js")
     link(href="style.css" rel="stylesheet")
 
 div(id="navBar")
@@ -27,3 +26,4 @@ section(class="main_area")
         a(class="sign_btn" href="/login") Login!
 script(src="./js/validation.js")
 script(src="./js/captcha.js")
+script(src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer)

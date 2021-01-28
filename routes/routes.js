@@ -222,26 +222,21 @@ exports.handleSend = (req, res) => {
 
   let xmlhttp = new XMLHttpRequest();
 
-  xmlhttp.onload = function () {
-    let result = JSON.stringify(xmlhttp.response);
-    console.log(result);
+  
 
-    if(result.success !== undefined && !body.success) {
-      return res.json({"responseError" : "Failed captcha verification"});
-    }
-    else {
-      res.json({"responseSuccess" : "Sucess"});
-    }
-  };
+  // xmlhttp.onload = function () {
+  //   let result = JSON.stringify(xmlhttp.gresponse);
+  //   console.log(result);
+
+  //   if(result.success !== undefined && !body.success) {
+  //     return res.json({"responseError" : "Failed captcha verification"});
+  //   }
+  //   else {
+  //     res.json({"responseSuccess" : "Sucess"});
+  //   }
+  // };
   xmlhttp.open("POST", url, true);
   xmlhttp.send();
-
-  // fetch(url, {
-  //   method: 'post'
-  // })
-  //   .then(response => response.json())
-  //   .then(google_response => res.json({ google_response }))
-  //   .catch(error => res.json({ error }));
 };
 
 exports.test = (req, res) => {
