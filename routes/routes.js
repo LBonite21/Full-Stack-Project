@@ -215,33 +215,29 @@ exports.createAccount = (req, res) => {
   });
 }
 
-exports.handleCaptcha = (req, res) => {
-  let token = req.body['g-recaptcha-response']
+exports.handleSend = (req, res) => {
+  const secret_key = "6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida";
+  const token = req.body.token;
+  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
 
-  console.log(token);
-}
+  let xmlhttp = new XMLHttpRequest();
 
-// exports.handleSend = (req, res) => {
-//   const secret_key = process.env.SECRET_KEY;
-//   const token = req.body.token;
-//   const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+  
 
-//   let xmlhttp = new XMLHttpRequest();
+  // xmlhttp.onload = function () {
+  //   let result = JSON.stringify(xmlhttp.gresponse);
+  //   console.log(result);
 
-//   xmlhttp.onload = function () {
-//     let result = JSON.stringify(xmlhttp.response);
-//     console.log(result);
-//   };
-//   xmlhttp.open("POST", url, true);
-//   xmlhttp.send();
-
-//   // fetch(url, {
-//   //   method: 'post'
-//   // })
-//   //   .then(response => response.json())
-//   //   .then(google_response => res.json({ google_response }))
-//   //   .catch(error => res.json({ error }));
-// };
+  //   if(result.success !== undefined && !body.success) {
+  //     return res.json({"responseError" : "Failed captcha verification"});
+  //   }
+  //   else {
+  //     res.json({"responseSuccess" : "Sucess"});
+  //   }
+  // };
+  xmlhttp.open("POST", url, true);
+  xmlhttp.send();
+};
 
 exports.test = (req, res) => {
   let rev = {
@@ -347,8 +343,7 @@ exports.deleteReview = (req, res) => {
     });
 }
 
-exports.updateAccountInfo = (req, res) => { 
-  console.log(req.body.password);
+exports.updateAccountInfo = (req, res) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     let myHash = hash;
     Account.findOneAndUpdate(
@@ -415,7 +410,6 @@ exports.sendEmailForPassword = (req,res) => {
 }
 
 exports.processSendEmailForPassword = (req,res) => {
-  // res.redirect('/')
   Account.findOne({email: req.body.email}, (err, account) => {
     if(account) {
       async function main() {
@@ -430,26 +424,20 @@ exports.processSendEmailForPassword = (req,res) => {
           secure: false, // true for 465, false for other ports
           auth: {
             user: '', // OUTLOOK EMAIL HERE ----------------------------------------------------------------------------------------------------
-            pass: '', // OUTLOOK PASSWORD HERE
+            pass: '', // OUTLOOK PASSWORD HERE ----------------------------------------------------------------------------------------------------
           },
         });
       
         // send mail with defined transport object
         let info = await transporter.sendMail({
           from: "", // OUTLOOK EMAIL HERE ----------------------------------------------------------------------------------------------------
+          // to: `${account.email}`,
           to: '', // OUTLOOK EMAIL HERE ----------------------------------------------------------------------------------------------------
           subject: "Movie Review Forgot Password", // Subject line
           text: "Click on the link to reset your password", // plain text body
           html: `<p>Click on the attached link to reset your password.</p>
-          <a href="localhost:3000/reset">Reset Password Here!</a>`, // html body
+          <a href="localhost:3000/reset?id=${account._id}">Reset Password Here!</a>`, // html body
         });
-      
-        console.log("Message sent: %s", info.messageId);
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-      
-        // Preview only available when sending through an Ethereal account
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
       }
       
       main().catch(console.error)
@@ -464,5 +452,41 @@ exports.processSendEmailForPassword = (req,res) => {
 }
 
 exports.resetPasswordPage = (req,res) => {
-  res.render('reset')
+  console.log(req.query.id);
+  let validAccount = false;
+  Account.findOne({'_id': req.query.id}, (err,account) => {
+    console.log(account)
+    if(account){
+      validAccount = true;
+    }
+    else{
+      validAccount = false;
+    }
+    if(validAccount){
+      res.render('reset')
+    } else {
+      res.redirect('/')
+    }
+  })
+}
+
+exports.processResetPassword  =(req,res) => {
+  let accountId = req.query.id;
+  bcrypt.hash(req.body.password, 10, (err, hash) => {
+    if(err) console.log(err)
+    let myHash = hash;
+    Account.findOneAndUpdate(
+      { _id: accountId },
+      {
+        $set: {
+          password: myHash, 
+        }
+      },
+      (err, data) => {
+        if (err) res.send(err);
+        console.log(data);
+      }
+    );
+    res.redirect('/');
+  })
 }

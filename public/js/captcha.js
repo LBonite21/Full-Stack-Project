@@ -1,9 +1,7 @@
-//Site key: 6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY
-//Secret key: 6LcxZTwaAAAAAMcVsKBwKLRYJNNzte1OBL8L7fXN
+//Site key: 6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ
+//Secret key: 6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida
 
-// function showResult(text) {
-//     document.querySelector('#result').innerHTML = text;
-// }
+var widgetId1;
 
 // function handleClick(token) {
 //     return function () {
@@ -25,23 +23,17 @@
 //     }
 // }
 
-// grecaptcha.ready(function () {
-//     grecaptcha.execute('6LcxZTwaAAAAADFAe64Jwf8Ox2rHAlj61iphlijY', { action: 'demo' })
-//         .then(function (token) {
-//             document.querySelector('#submitBtn').addEventListener('click', handleClick(token));
-//         });
-// });
-let cap = document.getElementById('g-recaptcha-response');
-let register = document.getElementById('register');
-
-function onClick(e) {
-    e.preventDefault();
-    grecaptcha.ready(function() {
-        grecaptcha.execute('reCAPTCHA_site_key', {action: 'submit'}).then(token => {
-            cap.value = token;
-        });
-        cap.style.visibility = "hidden";
-        register.style.visibility = "visible";
-        console.log("some")
+var verifyCallback = function (response) {
+    alert(response)
+};
+var onloadCallback = function () {
+    widgetId1 = grecaptcha.render('result', {
+        'sitekey': '6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ',
+        'theme': 'light'
     });
-  }
+    grecaptcha.ready(function () {
+        grecaptcha.execute('6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ', { action: 'signup' })
+            .then(function (token) {
+            });
+    });
+};
