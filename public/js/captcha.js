@@ -3,25 +3,25 @@
 
 var widgetId1;
 
-function handleClick(token) {
-    return function () {
-        var data = {
-            token: token
-        };
+// function handleClick(token) {
+//     return function () {
+//         var data = {
+//             token: token
+//         };
 
-        fetch('/signup', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(data)
-        })
-            .then(response => response.text())
-            .then(text => showResult(text))
-            .catch(error => showResult(error));
-    }
-}
+//         fetch('/signup', {
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             method: 'post',
+//             body: JSON.stringify(data)
+//         })
+//             .then(response => response.text())
+//             .then(text => showResult(text))
+//             .catch(error => showResult(error));
+//     }
+// }
 
 var verifyCallback = function (response) {
     alert(response)
