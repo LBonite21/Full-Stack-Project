@@ -3,6 +3,7 @@ const { text, json } = require("body-parser");
 const e = require("express");
 const nodemailer = require("nodemailer");
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const request = require('request');
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
@@ -216,27 +217,44 @@ exports.createAccount = (req, res) => {
 }
 
 exports.handleSend = (req, res) => {
-  const secret_key = "6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida";
-  const token = req.body.token;
-  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+  const secretKey = "6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida";
+  // const token = req.body.token;
+  // const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
 
-  let xmlhttp = new XMLHttpRequest();
+  if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+    return res.json({ "responseError": "Please select captcha first" });
+  }
 
-  
+  const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 
-  // xmlhttp.onload = function () {
-  //   let result = JSON.stringify(xmlhttp.gresponse);
-  //   console.log(result);
+  request(verificationURL, function (error, response, body) {
+    body = JSON.parse(body);
 
-  //   if(result.success !== undefined && !body.success) {
-  //     return res.json({"responseError" : "Failed captcha verification"});
-  //   }
-  //   else {
-  //     res.json({"responseSuccess" : "Sucess"});
-  //   }
-  // };
-  xmlhttp.open("POST", url, true);
-  xmlhttp.send();
+    if (body.success !== undefined && !body.success) {
+      return res.json({ "responseError": "Failed captcha verification" });
+    }
+    else {
+      let body = req.body;
+      bcrypt.hash(body.password, 10, (err, response) => {
+        if (err) console.log(err);
+        let user = new Account({
+          email: `${body.email}`,
+          username: `${body.username}`,
+          password: `${response}`,
+        });
+        user.save((err, person) => {
+          if (err) {
+            res.render("signup", {
+              errmsg: "Error"
+            });
+          } else {
+            res.redirect("/");
+          }
+          console.log(`${body.username} added`);
+        });
+      });
+    }
+  });
 };
 
 exports.test = (req, res) => {
@@ -392,31 +410,31 @@ exports.makeAdmin = (req, res) => {
 }
 
 exports.makeNotAdmin = (req, res) => {
-  Account.updateOne({email: req.body.email}, { isAdmin: false })
-  .then( () => {
-    console.log(`${req.body.email} is not admin.`);
-    req.session.user.account.isAdmin = false;
-    res.redirect('/');
-  })
-  .catch( (err) => {
-    console.log(err);
-  });
+  Account.updateOne({ email: req.body.email }, { isAdmin: false })
+    .then(() => {
+      console.log(`${req.body.email} is not admin.`);
+      req.session.user.account.isAdmin = false;
+      res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-exports.sendEmailForPassword = (req,res) => {
+exports.sendEmailForPassword = (req, res) => {
   res.render('forgotPasswordSendEmail', {
     failedEmailAttempt: false
   })
 }
 
-exports.processSendEmailForPassword = (req,res) => {
-  Account.findOne({email: req.body.email}, (err, account) => {
-    if(account) {
+exports.processSendEmailForPassword = (req, res) => {
+  Account.findOne({ email: req.body.email }, (err, account) => {
+    if (account) {
       async function main() {
         // Generate test SMTP service account from ethereal.email
         // Only needed if you don't have a real mail account for testing
         let testAccount = await nodemailer.createTestAccount();
-      
+
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
           host: "smtp.office365.com",
@@ -427,7 +445,7 @@ exports.processSendEmailForPassword = (req,res) => {
             pass: '', // OUTLOOK PASSWORD HERE ----------------------------------------------------------------------------------------------------
           },
         });
-      
+
         // send mail with defined transport object
         let info = await transporter.sendMail({
           from: "", // OUTLOOK EMAIL HERE ----------------------------------------------------------------------------------------------------
@@ -439,9 +457,9 @@ exports.processSendEmailForPassword = (req,res) => {
           <a href="localhost:3000/reset?id=${account._id}">Reset Password Here!</a>`, // html body
         });
       }
-      
+
       main().catch(console.error)
-      .then(res.redirect('/'));
+        .then(res.redirect('/'));
     }
     else {
       res.render('forgotPasswordSendEmail', {
@@ -451,18 +469,18 @@ exports.processSendEmailForPassword = (req,res) => {
   })
 }
 
-exports.resetPasswordPage = (req,res) => {
+exports.resetPasswordPage = (req, res) => {
   console.log(req.query.id);
   let validAccount = false;
-  Account.findOne({'_id': req.query.id}, (err,account) => {
+  Account.findOne({ '_id': req.query.id }, (err, account) => {
     console.log(account)
-    if(account){
+    if (account) {
       validAccount = true;
     }
-    else{
+    else {
       validAccount = false;
     }
-    if(validAccount){
+    if (validAccount) {
       res.render('reset')
     } else {
       res.redirect('/')
@@ -470,16 +488,16 @@ exports.resetPasswordPage = (req,res) => {
   })
 }
 
-exports.processResetPassword  =(req,res) => {
+exports.processResetPassword = (req, res) => {
   let accountId = req.query.id;
   bcrypt.hash(req.body.password, 10, (err, hash) => {
-    if(err) console.log(err)
+    if (err) console.log(err)
     let myHash = hash;
     Account.findOneAndUpdate(
       { _id: accountId },
       {
         $set: {
-          password: myHash, 
+          password: myHash,
         }
       },
       (err, data) => {
