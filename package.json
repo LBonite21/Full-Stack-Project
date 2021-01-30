@@ -28,6 +28,7 @@
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.7",
     "pug": "^3.0.0",
+    "request": "^2.88.2",
     "xmlhttprequest": "^1.8.0"
   }
 }

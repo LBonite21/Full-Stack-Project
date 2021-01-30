@@ -24,7 +24,7 @@ with open('users4.csv') as csv_file:
 
             user = {
                 'isAdmin' : False,
-                'username' : f'{row[0]}{row[1][0]}',
+                'username' : f'{row[0].lower()}{row[1][0].lower()}',
                 'fname' : row[0],
                 'lname' : row[1],
                 'street' : row[2],

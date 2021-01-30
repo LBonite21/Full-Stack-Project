@@ -1,6 +1,5 @@
 header
     h1(class="page_title") Register
-    script(src="https://www.google.com/recaptcha/api.js")
     link(href="style.css" rel="stylesheet")
 
 div(id="navBar")
@@ -13,7 +12,7 @@ div(id="navBar")
             a(href="/signup" class="nav_item") Login
 section(class="main_area")
     p(class="error_label") #{errmsg}
-    form(action="/signup" method="POST" class="form")
+    form(action="/signup" method="POST" class="form" id='demo-form')
         input(type="text" name="email" placeholder="Email" id="email" class="signup_field")
         p(id="emailError" class="error_label")
         input(type="text" name="username" placeholder="Username" id="username" class="signup_field")
@@ -27,3 +26,4 @@ section(class="main_area")
         a(class="sign_btn" href="/login") Login!
 script(src="./js/validation.js")
 script(src="./js/captcha.js")
+script(src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer)
