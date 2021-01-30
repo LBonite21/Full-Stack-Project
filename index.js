@@ -12,8 +12,8 @@ app.use(cors());
 app.use(expressSession({ secret: "secret", saveUninitialized: true, resave: true }));
 
 
-const checkAuth = (req,res,next) => {
-    if(req.session.user && req.session.user.isAuthenticated) {
+const checkAuth = (req, res, next) => {
+    if (req.session.user && req.session.user.isAuthenticated) {
         next();
     } else {
         res.redirect('/');
@@ -21,9 +21,10 @@ const checkAuth = (req,res,next) => {
 };
 
 app.set('view engine', 'pug');
-app.set('views', __dirname+'/views');
+app.set('views', __dirname + '/views');
 
-app.use(express.static(path.join(__dirname+'/public')));
+app.use(express.static(path.join(__dirname + '/public')));
+app.use(bodyParser.json());
 
 let urlencodedParser = bodyParser.urlencoded({
     extended: false
@@ -38,6 +39,9 @@ app.get('/adminPage', checkAuth, route.adminPage);
 app.get('/signup', route.signup);
 
 app.post('/signup', urlencodedParser, route.handleSend);
+app.post('/signup', function (req, res) {
+    res.redirect(307, '/');
+});
 app.post('/updateAccountData', urlencodedParser, route.updateAccountInfo);
 app.post('/deleteAccount', urlencodedParser, route.deleteAccount);
 app.post('/makeAdmin', urlencodedParser, route.makeAdmin);
