@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import Header from './header';
-
-class EditAccount extends Component {
+class MovieBox extends Component {
     constructor(props){
         super(props);
 
@@ -16,7 +14,6 @@ class EditAccount extends Component {
     render() {
         return (
             <>
-                <Header />
                 <div className='container'>
                     <a href='/' onClick={() => { sessionStorage.removeItem('user') }}>Log Out</a>
                 </div>
@@ -25,4 +22,4 @@ class EditAccount extends Component {
     }
 }
 
-export default EditAccount;
+export default MovieBox;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Header from './header';
+
 class Login extends Component {
     constructor(props){
         super(props);
@@ -21,7 +23,14 @@ class Login extends Component {
         fetch('http://localhost:3001/', {
             method: "GET"
         }).then(res => res.json())
-        .then(result => this.setState({ accounts: result }))
+        .then(result => this.setState({ accounts: result }, () => {
+            // Adds all the reviews to a session variable
+            let list = [];
+            this.state.accounts.forEach(account => {
+                list.push(account.reviews);
+            });
+            sessionStorage.setItem('reviews', JSON.stringify(list));
+        }))
         .catch(e => console.log(e));
     }
 
@@ -50,7 +59,7 @@ class Login extends Component {
             if (result.status) {
                 this.setState({ redirect: true }, () => {
                     sessionStorage.setItem('user', JSON.stringify(result.account));
-                    console.log('It worked!')
+                    this.setState({ redirect: true });
                 });
             } else {
                 console.log('Incorrect Credentials.');
@@ -59,20 +68,32 @@ class Login extends Component {
     }
 
     render() {
-        console.log(this.state.accounts)
-        console.log(this.state.username)
-        console.log(this.state.password)
+        let afterLoggedIn;
+        let beforeLoggedIn = <div>
+            <label htmlFor='username'>Username </label>
+            <input type='text' name='username'
+            onChange={this.updateUsername}/>
+            <label htmlFor='password'>Password </label>
+            <input type='password' name='password' 
+            onChange={this.updatePassword}/>
+            <input type='submit' value='Submit' onClick={this.handleSignIn}/>
+        </div>
+
+        if (this.state.redirect || sessionStorage.getItem('user')) {
+            beforeLoggedIn = <p></p>;
+            afterLoggedIn = <a href='/movies' >Visit Movie Page!</a>
+        }
 
         return (
-            <div className='container'>
-                <label htmlFor='username'>Username </label>
-                <input type='text' name='username'
-                onChange={this.updateUsername}/>
-                <label htmlFor='password'>Password </label>
-                <input type='text' name='username' 
-                onChange={this.updatePassword}/>
-                <input type='submit' value='Submit' onClick={this.handleSignIn}/>
-            </div>
+            <>
+                <Header />
+                <div className='container'>
+                    { beforeLoggedIn }
+                    { afterLoggedIn }
+                </div>
+                <p>agustind</p>
+                <p>UoNt-Kvx2</p>
+            </>
         );
     }
 }

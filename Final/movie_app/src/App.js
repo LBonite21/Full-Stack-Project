@@ -5,8 +5,11 @@ import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import Login from './components/login';
 import SignUp from './components/signUp';
 import EditAccount from './components/editAccount';
+import Admin from './components/admin';
 import Movie from './components/movie';
 import Reset from './components/reset';
+
+import ProtectedRoute from './components/protectedRoute';
 
 class App extends Component {
 
@@ -19,6 +22,10 @@ class App extends Component {
     return(
       <Router>
         <Route path='/' exact component={Login}/>
+        <ProtectedRoute path='/movies' component={Movie} auth={isLoggedIn}/>
+        <ProtectedRoute path='/account' component={EditAccount} auth={isLoggedIn}/>
+        <ProtectedRoute path='/admin' component={Admin} auth={isLoggedIn} />
+        {/* <Route path='/*' component={Login}/> */}
       </Router>
     );
   }
