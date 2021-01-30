@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 let account = require('../model/accountModel')
 const bcrypt = require("bcrypt");
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 exports.root = (req, res) => {
     res.send("API is running!");
@@ -37,4 +38,33 @@ exports.handleSignIn = (req, res) => {
             }
         });
     });
+}
+
+exports.searchByGenre = (req, res) => {
+    let genreId = req.body.genreId;
+    let genre_search = `https://api.themoviedb.org/3/discover/movie?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${encodeURI(genreId)}`;
+    let request = new XMLHttpRequest();
+
+    request.open('GET', genre_search, true);
+    request.onload = () => {
+        let result = JSON.parse(request.responseText).results;
+        // console.log(result);
+        res.json(result);
+    }
+    request.send();
+}
+exports.searchByQuery = (req, res) => {
+    let query = req.body.query;
+    let query_search = `https://api.themoviedb.org/3/search/multi?api_key=da2444bb6b2f3c7c2a698917f8de85e4&language=en-US&query=${encodeURI(query)}&page=1&include_adult=false`;
+    let request = new XMLHttpRequest();
+
+    // console.log(genre_search);
+
+    request.open('GET', query_search, true);
+    request.onload = () => {
+        let result = JSON.parse(request.responseText).results;
+        // console.log(result);
+        res.json(result);
+    }
+    request.send();
 }
