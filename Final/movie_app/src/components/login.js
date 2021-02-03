@@ -73,6 +73,7 @@ class Login extends Component {
             <label htmlFor='username'>Username </label>
             <input type='text' name='username'
             onChange={this.updateUsername}/>
+            <br />
             <label htmlFor='password'>Password </label>
             <input type='password' name='password' 
             onChange={this.updatePassword}/>
@@ -87,6 +88,7 @@ class Login extends Component {
         return (
             <>
                 <Header />
+                <br />
                 <div className='container'>
                     { beforeLoggedIn }
                     { afterLoggedIn }
