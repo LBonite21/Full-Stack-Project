@@ -95,7 +95,7 @@ class Login extends Component {
       <>
         <Header />
         <br />
-        <div className="container">
+        <div className="login-container">
           <div className="login-form">
             {beforeLoggedIn}
             {afterLoggedIn}

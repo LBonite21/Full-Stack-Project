@@ -188,7 +188,7 @@ img {
   margin: 6px 0;
 }
 
-/* .container {
+.login-container {
   display: flex;
   flex-direction: row;
 
@@ -196,7 +196,8 @@ img {
 }
 
 .login-form {
-  width: 50%;
+  flex: 1;
+  /* width: 50%; */
   text-align: center;
   border: 1px solid black;
-} */
+}
