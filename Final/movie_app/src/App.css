@@ -1,4 +1,6 @@
 @import-normalize;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
+
 .movie-modal {
   position: fixed;
   top: 0;
@@ -62,6 +64,8 @@
   align-items: center;
 
   padding-bottom: 10px;
+
+  font-family: 'Noto Sans SC', sans-serif;
 }
 .modal-container {
   display: flex;
@@ -130,6 +134,7 @@ img {
   overflow: hidden;
   background-color: #92b0e3;
   margin: 0;
+  font-family: 'Noto Sans SC', sans-serif;
 }
 
 .nav-bar a {
@@ -231,23 +236,79 @@ img {
   border: 1px solid black;
 }
 
+/* Single Button */
+
+.any-btn {
+  /* font-family: "Noto Sans SC", sans-serif; */
+  padding: 5px 15px;
+  background: lightgray;
+  margin: 15px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.any-btn:hover {
+  cursor: pointer;
+  background-color: #b43b08;
+  color: #fff;
+}
+
 /* Button Grid  */
 
+.btn-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .btn-grid {
+  flex: 1;
   width: 1000px;
-  background: gray;
+  /* background: #707070; */
   overflow-y: auto;
 }
 
 .btn-grid > div {
+  /* font-family: "Noto Sans SC", sans-serif; */
   width: 138px;
   padding: 14px 16px;
+  border-radius: 4px;
   float: left;
-  background: lightgray;   
+  background: lightgray;
   margin: 15px;
   text-align: center;
 }
 
 .btn-grid > div:hover {
   cursor: pointer;
+  background-color: #b43b08;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+
+  .btn-grid > div {
+    font-family: "Noto Sans SC", sans-serif;
+    /* width: 138px; */
+    padding: 4px 10px;
+    border-radius: 4px;
+    /* float: left; */
+    background: lightgray;
+    text-align: center;
+    margin-left: 27px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+
+  .btn-grid > div {
+    font-family: "Noto Sans SC", sans-serif;
+    /* width: 138px; */
+    padding: 4px 10px;
+    border-radius: 4px;
+    float: left;
+    background: lightgray;
+    text-align: center;
+    margin-right: 3px;
+    margin-left: 12px;
+  }
 }

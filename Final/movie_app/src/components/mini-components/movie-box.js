@@ -60,7 +60,7 @@ class MovieBox extends Component {
                     <img onClick={ this.showMovieModal } src={`https://image.tmdb.org/t/p/w500${ this.props.poster_path }`}/>
                     {/* <p className='movie-info'>Released { this.props.release_date }</p> */}
                     {/* <p className='movie-info'>{ this.props.overview }</p> */}
-                    <button onClick={ this.showMovieModal }>View More Information Now</button>
+                    <div className="any-btn" onClick={ this.showMovieModal }>View More Information Now</div>
                 </div>
             </>
         );

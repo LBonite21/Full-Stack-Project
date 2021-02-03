@@ -73,30 +73,32 @@ class Movie extends Component {
                     <br />
                     <input type='text' name='query' onChange={ this.updateQuery }/>
                     <br />
-                    <div onClick={ this.handleQuerySearch }>Search</div>
+                    <div className="any-btn" onClick={ this.handleQuerySearch }>Search</div>
                     <br />
                     <label htmlFor='genre'>Genre</label>
                     <br />
-                    <div name='genre' className='btn-grid'>
-                        <div id='28' onClick={ this.handleGenreSearch }>Action</div>
-                        <div id='12' onClick={ this.handleGenreSearch }>Adventure</div>
-                        <div id='16' onClick={ this.handleGenreSearch }>Animation</div>
-                        <div id='35' onClick={ this.handleGenreSearch }>Comedy</div>
-                        <div id='80' onClick={ this.handleGenreSearch }>Crime</div>
-                        <div id='99' onClick={ this.handleGenreSearch }>Documentary</div>
-                        <div id='18' onClick={ this.handleGenreSearch }>Drama</div>
-                        <div id='10751' onClick={ this.handleGenreSearch }>Family</div>
-                        <div id='14' onClick={ this.handleGenreSearch }>Fantasy</div>
-                        <div id='36' onClick={ this.handleGenreSearch }>History</div>
-                        <div id='27' onClick={ this.handleGenreSearch }>Horror</div>
-                        <div id='10402' onClick={ this.handleGenreSearch }>Music</div>
-                        <div id='9648' onClick={ this.handleGenreSearch }>Mystery</div>
-                        <div id='10749' onClick={ this.handleGenreSearch }>Romance</div>
-                        <div id='878' onClick={ this.handleGenreSearch }>Science Fiction</div>
-                        <div id='10770' onClick={ this.handleGenreSearch }>TV Movie</div>
-                        <div id='53' onClick={ this.handleGenreSearch }>Thriller</div>
-                        <div id='10752' onClick={ this.handleGenreSearch }>War</div>
-                        <div id='37' onClick={ this.handleGenreSearch }>Western</div>
+                    <div className="btn-container">
+                        <div name='genre' className='btn-grid'>
+                            <div id='28' onClick={ this.handleGenreSearch }>Action</div>
+                            <div id='12' onClick={ this.handleGenreSearch }>Adventure</div>
+                            <div id='16' onClick={ this.handleGenreSearch }>Animation</div>
+                            <div id='35' onClick={ this.handleGenreSearch }>Comedy</div>
+                            <div id='80' onClick={ this.handleGenreSearch }>Crime</div>
+                            <div id='99' onClick={ this.handleGenreSearch }>Documentary</div>
+                            <div id='18' onClick={ this.handleGenreSearch }>Drama</div>
+                            <div id='10751' onClick={ this.handleGenreSearch }>Family</div>
+                            <div id='14' onClick={ this.handleGenreSearch }>Fantasy</div>
+                            <div id='36' onClick={ this.handleGenreSearch }>History</div>
+                            <div id='27' onClick={ this.handleGenreSearch }>Horror</div>
+                            <div id='10402' onClick={ this.handleGenreSearch }>Music</div>
+                            <div id='9648' onClick={ this.handleGenreSearch }>Mystery</div>
+                            <div id='10749' onClick={ this.handleGenreSearch }>Romance</div>
+                            <div id='878' onClick={ this.handleGenreSearch }>Science Fiction</div>
+                            <div id='10770' onClick={ this.handleGenreSearch }>TV Movie</div>
+                            <div id='53' onClick={ this.handleGenreSearch }>Thriller</div>
+                            <div id='10752' onClick={ this.handleGenreSearch }>War</div>
+                            <div id='37' onClick={ this.handleGenreSearch }>Western</div>
+                        </div>
                     </div>
                 </div>
                 <div className='movie-container'>
