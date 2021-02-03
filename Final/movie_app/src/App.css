@@ -215,6 +215,8 @@ img {
   margin: 6px 0;
 }
 
+/* Login Page  */
+
 .login-container {
   display: flex;
   flex-direction: row;
@@ -227,4 +229,25 @@ img {
   /* width: 50%; */
   text-align: center;
   border: 1px solid black;
+}
+
+/* Button Grid  */
+
+.btn-grid {
+  width: 1000px;
+  background: gray;
+  overflow-y: auto;
+}
+
+.btn-grid > div {
+  width: 138px;
+  padding: 14px 16px;
+  float: left;
+  background: lightgray;   
+  margin: 15px;
+  text-align: center;
+}
+
+.btn-grid > div:hover {
+  cursor: pointer;
 }
