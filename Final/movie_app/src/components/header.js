@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const Header = (props) => {
   let moviePage;
@@ -29,6 +31,16 @@ const Header = (props) => {
           }}
         >
           Log Out
+        </a>
+        <a href="javascript:void(0);" class="icon" onClick={() => {
+            var x = document.getElementById("myNavBar");
+            if (x.className === "nav-bar") {
+                x.className += " responsive";
+            } else {
+                x.className = "nav-bar"
+            }
+        }}>
+          <FontAwesomeIcon  icon={faBars}/>
         </a>
       </div>
     </>
