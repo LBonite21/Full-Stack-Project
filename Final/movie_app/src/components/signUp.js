@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 import Header from './header';
 
@@ -172,11 +172,11 @@ class SignUp extends Component {
                             {errors.password.length > 0 &&
                                 <span className='error'>{errors.password}</span>}
                             <div id="result"></div>
-                            <ReCAPTCHA
+                            {/* <ReCAPTCHA
                                 ref={(el) => { this.recaptcha = el; }}
                                 sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
                                 onChange={this.handleCaptchaResponseChange}
-                            />
+                            /> */}
                             <input type='submit' value='Submit' onClick={this.handleSignUp} />
                         </form>
                     </div>
