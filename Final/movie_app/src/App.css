@@ -4,16 +4,41 @@
 
 .nav-bar {
   overflow: hidden;
-  background-color:#92B0E3;
+  background-color: #92b0e3;
   margin: 0;
 }
 
 .nav-bar a {
   float: left;
   display: block;
-  color: #000022;
+  color: #000;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+}
+
+.nav-bar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-bar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.nav-bar .icon {
+  display: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+}
+
+.login-form {
+  border: 1px solid black;
 }

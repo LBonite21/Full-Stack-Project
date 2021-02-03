@@ -1,24 +1,24 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
+
 const Header = (props) => {
   let moviePage;
   let accountPage;
   let adminPage;
 
   if (sessionStorage.getItem("user")) {
-    moviePage = <a href="/movies">Movies</a>;
-    accountPage = <a href="/account">Account Settings</a>;
-
-    // Checks if the user is an admin
+    moviePage = <NavLink to="/movies">Movies</NavLink>;
+    accountPage = <NavLink to="/account">Account Settings</NavLink>   // Checks if the user is an admin
     let isAdmin = JSON.parse(sessionStorage.getItem("user")).isAdmin;
     if (isAdmin) {
-      adminPage = <a href="/admin">Admin Settings</a>;
+      adminPage = <NavLink to="/admin">Admin Settings</NavLink>;
     }
   }
 
   return (
     <>
-      <div id="header" className="nav-bar">
-        <a href="/">Home</a>
+      <div id="myNavBar" className="nav-bar">
+        <NavLink exact to="/" activeClassName="active">Home</NavLink>
         {moviePage}
         {accountPage}
         {adminPage}
