@@ -20,6 +20,9 @@ const Header = (props) => {
   return (
     <>
       <div id="myNavBar" className="nav-bar">
+        <a href="/" className="dingo">
+          <img src="./img/dingo.png" />
+        </a>
         <NavLink exact to="/" activeClassName="active">Home</NavLink>
         {moviePage}
         {accountPage}
