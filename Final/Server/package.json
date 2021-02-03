@@ -19,6 +19,8 @@
     "body-parse": "^0.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.9.26"
+    "mongoose": "^5.9.26",
+    "react-google-recaptcha": "^2.1.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
