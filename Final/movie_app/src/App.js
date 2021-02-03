@@ -25,6 +25,7 @@ class App extends Component {
         <ProtectedRoute path='/movies' component={Movie} auth={isLoggedIn}/>
         <ProtectedRoute path='/account' component={EditAccount} auth={isLoggedIn}/>
         <ProtectedRoute path='/admin' component={Admin} auth={isLoggedIn} />
+        <Route path='/signup' component={SignUp} />
         {/* <Route path='/*' component={Login}/> */}
       </Router>
     );

@@ -1,31 +1,50 @@
-import React from 'react';
-const Header = props => {
-    let moviePage;
-    let accountPage;
-    let adminPage;
+import React from "react";
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-    if (sessionStorage.getItem('user')) {
-        moviePage = <a href='/movies'>Movies</a>
-        accountPage = <a href='/account'>Account Settings</a>
+const Header = (props) => {
+  let moviePage;
+  let accountPage;
+  let adminPage;
 
-        // Checks if the user is an admin
-        let isAdmin = JSON.parse(sessionStorage.getItem('user')).isAdmin;
-        if (isAdmin) {
-            adminPage = <a href='/admin'>Admin Settings</a>
-        }
+  if (sessionStorage.getItem("user")) {
+    moviePage = <NavLink to="/movies">Movies</NavLink>;
+    accountPage = <NavLink to="/account">Account Settings</NavLink>   // Checks if the user is an admin
+    let isAdmin = JSON.parse(sessionStorage.getItem("user")).isAdmin;
+    if (isAdmin) {
+      adminPage = <NavLink to="/admin">Admin Settings</NavLink>;
     }
+  }
 
-    return(
-        <>
-            <div id='header'>
-                <a href='/'>Go Home</a>
-                { moviePage }
-                { accountPage }
-                { adminPage }
-                <a href='/' onClick={() => { sessionStorage.removeItem('user') }}>Log Out</a>
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <div id="myNavBar" className="nav-bar">
+        <NavLink exact to="/" activeClassName="active">Home</NavLink>
+        {moviePage}
+        {accountPage}
+        {adminPage}
+        <a
+          href="/"
+          onClick={() => {
+            sessionStorage.removeItem("user");
+          }}
+        >
+          Log Out
+        </a>
+        <a href="javascript:void(0);" class="icon" onClick={() => {
+            var x = document.getElementById("myNavBar");
+            if (x.className === "nav-bar") {
+                x.className += " responsive";
+            } else {
+                x.className = "nav-bar"
+            }
+        }}>
+          <FontAwesomeIcon  icon={faBars}/>
+        </a>
+      </div>
+    </>
+  );
+};
 
 export default Header;
