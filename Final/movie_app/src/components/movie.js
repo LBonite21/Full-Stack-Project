@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Header from './header';
-import MovieBox from './mini-components/movie-box-modal';
+import MovieBox from './mini-components/movie-box';
 
 class Movie extends Component {
     constructor(props){
@@ -96,7 +96,7 @@ class Movie extends Component {
                         <button id='37' onClick={ this.handleGenreSearch }>Western</button>
                     </div>
                 </div>
-                <div className='container'>
+                <div className='movie-container'>
                     {
                         this.state.movie_list.map((movie, i) => {
                             if ("known_for" in movie) {

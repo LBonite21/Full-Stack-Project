@@ -19,21 +19,6 @@ class Login extends Component {
         this.handleSignIn = this.handleSignIn.bind(this);
     }
 
-    componentDidMount = () => {
-        fetch('http://localhost:3001/', {
-            method: "GET"
-        }).then(res => res.json())
-        .then(result => this.setState({ accounts: result }, () => {
-            // Adds all the reviews to a session variable
-            let list = [];
-            this.state.accounts.forEach(account => {
-                list.push(account.reviews);
-            });
-            sessionStorage.setItem('reviews', JSON.stringify(list));
-        }))
-        .catch(e => console.log(e));
-    }
-
     updateUsername = evt => {
         this.setState({ username: evt.target.value });
     }
