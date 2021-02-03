@@ -9,4 +9,7 @@ module.exports = function(app) {
     .post(controller.searchByGenre);
     app.route('/searchQuery')
     .post(controller.searchByQuery);
+    
+    app.route('/submitReview')
+    .post(controller.submitReview);
 }
