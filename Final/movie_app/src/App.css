@@ -1,6 +1,20 @@
 @import-normalize;
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
 
+.title-movie-page {
+  font-size: 60pt;
+  letter-spacing: 8px;
+
+  margin-top: 20px;
+  margin-bottom: 35px;
+}
+
+.search-input {
+  width: 325px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
 .movie-modal {
   position: fixed;
   top: 0;
@@ -34,6 +48,15 @@
 
   padding: 50px;
 }
+
+@media (max-height: 400px) {
+  .modal-main {
+    overflow-y: scroll !important;
+    margin: 0 auto !important;
+    position: static !important;
+  }
+}
+
 .topright {
   position: absolute;
   right: 0;
@@ -107,7 +130,7 @@
 
   justify-content: center;
   align-items: center;
-  background-color: #92B0E3;
+  background-color: #92b0e3;
 
   padding: 10px;
   margin: 10px;
@@ -284,7 +307,7 @@ img {
   width: 350px;
   height: 350px;
   /* margin-bottom: 20px; */
-  
+
   /* position: relative; */
   position: absolute;
   top: 105px;
@@ -322,7 +345,7 @@ img {
   .login-form {
     flex: 1;
     float: left;
-  
+
     margin: 0;
     margin-top: 30px;
     /* margin-left: 400px; */
@@ -333,7 +356,7 @@ img {
   .login-input {
     margin-top: 5px;
     margin-bottom: 5px;
-  
+
     width: 250px;
   }
 
@@ -347,7 +370,6 @@ img {
     /* float: left; */
     text-align: left;
   }
-
 }
 
 /* Single Button */
@@ -374,7 +396,7 @@ img {
 
 .btn-grid {
   width: 1000px;
-  /* background: #707070; */
+  background: #707070;
 
   display: flex;
   flex-flow: wrap;
@@ -402,12 +424,17 @@ img {
 }
 
 @media screen and (max-width: 600px) {
+
+  .title-movie-page {
+    font-size: 12pt;
+  }
+
   .btn-grid > div {
     font-family: "Noto Sans SC", sans-serif;
-    /* width: 138px; */
+    width: 138px;
     padding: 4px 10px;
     border-radius: 4px;
-    /* float: left; */
+    float: left;
     background: lightgray;
     text-align: center;
     margin-left: 27px;
@@ -417,7 +444,7 @@ img {
 @media screen and (max-width: 380px) {
   .btn-grid > div {
     font-family: "Noto Sans SC", sans-serif;
-    /* width: 138px; */
+    width: 138px;
     padding: 4px 10px;
     border-radius: 4px;
     float: left;

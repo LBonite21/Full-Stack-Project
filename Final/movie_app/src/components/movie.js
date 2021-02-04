@@ -68,10 +68,10 @@ class Movie extends Component {
             <>
                 <Header />
                 <div className='container'>
-                <br />
+                    <h1 className="title-movie-page">FANDINGO</h1>
                     <label htmlFor='query'>Search by Actor or Movie Title </label>
                     <br />
-                    <input type='text' name='query' onChange={ this.updateQuery }/>
+                    <input type='text' name='query' className="search-input" onChange={ this.updateQuery }/>
                     <br />
                     <div className="any-btn" onClick={ this.handleQuerySearch }>Search</div>
                     <br />
