@@ -258,13 +258,20 @@ img {
 .btn-container {
   display: flex;
   flex-direction: row;
+
 }
 
 .btn-grid {
   flex: 1;
   width: 1000px;
   /* background: #707070; */
-  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  flex-flow: wrap;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-grid > div {

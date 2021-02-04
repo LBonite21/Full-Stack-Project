@@ -1,6 +1,6 @@
 import { json } from 'body-parser';
 import React, { Component } from 'react';
-import Review from './review';
+import Review from '../mini-components/review';
 
 class MovieBoxModal extends Component {
     constructor(props){

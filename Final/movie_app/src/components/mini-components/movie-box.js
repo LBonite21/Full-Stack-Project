@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MovieBoxModal from './movie-box-modal';
+import MovieBoxModal from '../modals/movie-box-modal';
 
 class MovieBox extends Component {
     constructor(props){

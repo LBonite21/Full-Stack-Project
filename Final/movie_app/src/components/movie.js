@@ -75,7 +75,7 @@ class Movie extends Component {
                     <br />
                     <div className="any-btn" onClick={ this.handleQuerySearch }>Search</div>
                     <br />
-                    <label htmlFor='genre' className="body-head">Genre</label>
+                    <label htmlFor='genre' className="body-head">Genres</label>
                     <br />
                     <div className="btn-container">
                         <div name='genre' className='btn-grid'>

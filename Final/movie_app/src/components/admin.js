@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AdminContainer from './mini-components/admin-container';
 
 import Header from './header';
 
@@ -6,11 +7,33 @@ class Admin extends Component {
     constructor(props){
         super(props);
 
-        this.state = {};
+        this.state = {
+            accounts: []
+        };
+
+        this.updateAccounts = this.updateAccounts.bind(this);
     }
 
     componentDidMount = () => {
+        fetch("http://localhost:3001/", {
+            method: "GET",
+        })
+        .then((res) => res.json())
+        .then((result) =>
+            this.setState({ accounts: result })
+        ).catch((e) => console.log(e));
+    }
 
+    updateAccounts = result => {
+        if (result) {
+            fetch("http://localhost:3001/", {
+                method: "GET",
+            })
+            .then((res) => res.json())
+            .then((result) =>
+                this.setState({ accounts: result })
+            ).catch((e) => console.log(e));
+        }
     }
 
     render() {
@@ -19,7 +42,13 @@ class Admin extends Component {
                 <>
                     <Header />
                     <div className='container'>
-                        <a href='/' onClick={() => { sessionStorage.removeItem('user') }}>Log Out</a>
+                        {
+                            this.state.accounts.map((account, i) => {
+                                return <AdminContainer key={ i }
+                                account={ account }
+                                updateAccounts={ this.updateAccounts }/>
+                            })
+                        }
                     </div>
                 </>
             );
