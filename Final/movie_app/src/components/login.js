@@ -96,7 +96,7 @@ class Login extends Component {
         <br />
         <br />
         <label className="signup-label">Not a member? </label>
-        <a href="/signUp" className="any-btn">Sign Up</a>
+        <a href="/signUp" className="any-btn">Sign Up!</a>
         <p>agustind</p>
         <p>UoNt-Kvx2</p>
       </div>
@@ -106,7 +106,7 @@ class Login extends Component {
       beforeLoggedIn = <p></p>;
       afterLoggedIn = (
           <div className="login-after">
-            <h1 className="title-after">FANDINGO</h1>
+            <h1 className="title-after">WELCOME TO FANDINGO!</h1>
             <a href="/movies" className="any-btn">Visit Movie Page!</a>
             <br />
             <br />

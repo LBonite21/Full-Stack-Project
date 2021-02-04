@@ -1,9 +1,13 @@
 @import-normalize;
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
 
-.title-movie-page {
+.center-me {
+  text-align: center;
+}
+
+.title-page {
   font-size: 60pt;
-  letter-spacing: 8px;
+  letter-spacing: 5px;
 
   margin-top: 20px;
   margin-bottom: 35px;
@@ -47,14 +51,6 @@
   transform: translate(-50%, -50%);
 
   padding: 50px;
-}
-
-@media (max-height: 400px) {
-  .modal-main {
-    overflow-y: scroll !important;
-    margin: 0 auto !important;
-    position: static !important;
-  }
 }
 
 .topright {
@@ -262,10 +258,8 @@ img {
   flex: 1;
   float: left;
 
-  margin-top: 40px;
-  margin-left: 350px;
-  /* position: relative; */
-  /* left: -50%; */
+  margin-top: 50px;
+  margin-left: 315px;
 }
 
 .login-input {
@@ -290,14 +284,14 @@ img {
 
 .title-before {
   font-size: 60pt;
-  letter-spacing: 8px;
+  letter-spacing: 5px;
 
   margin: -30px -50px 30px;
 }
 
 .title-after {
   font-size: 60pt;
-  letter-spacing: 8px;
+  letter-spacing: 5px;
 
   margin-top: -20px;
   margin-bottom: 30px;
@@ -310,7 +304,7 @@ img {
 
   /* position: relative; */
   position: absolute;
-  top: 105px;
+  top: 130px;
   left: 160px;
   /* bottom: 380px; */
 }
@@ -337,9 +331,15 @@ img {
 }
 
 @media screen and (max-width: 600px) {
-  .title {
-    font-size: 40pt;
-    margin: 0;
+  .title-before {
+    font-size: 30pt;
+    margin-bottom: 35px;
+    text-align: center;
+  }
+
+  .title-after {
+    font-size: 30pt;
+    margin-bottom: 35px;
   }
 
   .login-form {
@@ -358,10 +358,6 @@ img {
     margin-bottom: 5px;
 
     width: 250px;
-  }
-
-  .login-dingo-before {
-    display: none;
   }
 
   .personality-container {
@@ -396,9 +392,11 @@ img {
 
 .btn-grid {
   width: 1000px;
-  background: #707070;
+  /* background: #707070; */
+  /* overflow-y: auto; */
 
   display: flex;
+  /* flex-direction: column; */
   flex-flow: wrap;
 
   justify-content: center;
@@ -424,14 +422,19 @@ img {
 }
 
 @media screen and (max-width: 600px) {
+  .title-page {
+    font-size: 32pt;
+    margin-bottom: 8px;
+    margin-top: 50px;
+  }
 
-  .title-movie-page {
-    font-size: 12pt;
+  .btn-grid {
+    width: 480px;
   }
 
   .btn-grid > div {
     font-family: "Noto Sans SC", sans-serif;
-    width: 138px;
+    width: 100px;
     padding: 4px 10px;
     border-radius: 4px;
     float: left;
@@ -442,9 +445,13 @@ img {
 }
 
 @media screen and (max-width: 380px) {
+  .btn-grid {
+    width: 400px;
+  }
+
   .btn-grid > div {
     font-family: "Noto Sans SC", sans-serif;
-    width: 138px;
+    width: 120px;
     padding: 4px 10px;
     border-radius: 4px;
     float: left;
@@ -457,4 +464,77 @@ img {
 
 .body-head {
   font-size: 20pt;
+}
+
+/* Sign Up Page  */
+
+.signup-container {
+  font-family: "Noto Sans SC", sans-serif;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.signup-form {
+  flex: 1;
+  float: left;
+
+  margin-top: 9px;
+  margin-left: 315px;
+}
+
+.signup-form h1.title-before {
+  margin-top: 30px;
+  margin-bottom: 7px;
+}
+
+.signup-form a.any-btn {
+  padding: 3px 100px;
+  margin: 0;
+  margin-left: 36px;
+}
+
+.signup-field {
+  width: 325px;
+  height: 22px;
+
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .signup-field {
+    width: 250px;
+    /* height: 15px; */
+
+    margin-top: -10px;
+    margin-bottom: -10px;
+  }
+
+  .signup-form {
+    /* flex: 1; */
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    float: left;
+
+    margin: 0;
+    /* margin-top: 10px; */
+    /* margin-left: 400px; */
+    /* position: relative; */
+    /* left: -50%; */
+  }
+
+  .signup-form a.any-btn {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .login-dingo-before {
+    display: none;
+  }
 }
