@@ -76,15 +76,15 @@ class Login extends Component {
     let afterLoggedIn;
     let beforeLoggedIn = (
       <div className="login-form">
-        <h1>Fandingo</h1>
+        
         <label htmlFor="username">Username </label>
         <br />
-        <input type="text" name="username" onChange={this.updateUsername} />
+        <input type="text" name="username" className="login-input" onChange={this.updateUsername} />
         <br />
         <br />
         <label htmlFor="password">Password </label>
         <br />
-        <input type="password" name="password" onChange={this.updatePassword} />
+        <input type="password" name="password" className="login-input" onChange={this.updatePassword} />
         <br />
         <br />
         <a onClick={this.handleSignIn} className="any-btn">
@@ -93,7 +93,7 @@ class Login extends Component {
         <br />
         <br />
         <br />
-        <label>Not a member?  </label>
+        <label>Not a member? </label>
         <a href="/signUp" className="any-btn">Sign Up</a>
         <p>agustind</p>
         <p>UoNt-Kvx2</p>
@@ -110,8 +110,10 @@ class Login extends Component {
         <Header />
         <br />
         <div className="login-container">
+        <h1 className="title">Fandingo</h1>
           {/* <div className="login-form"> */}
           {beforeLoggedIn}
+          <img src="./img/dingo.png" className="login-dingo"/>
           {afterLoggedIn}
           {/* <p>agustind</p>
           <p>UoNt-Kvx2</p> */}

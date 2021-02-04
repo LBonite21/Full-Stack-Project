@@ -242,8 +242,26 @@ img {
   /* left: -50%; */
 }
 
+.login-input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  width: 350px;
+}
+
 .login-form a.any-btn {
   margin: 0;
+}
+
+.title {
+  font-size: 60pt;
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.login-dingo {
+  width: 250px;
+  margin-bottom: 10px;
 }
 
 /* Single Button */
