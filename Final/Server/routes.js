@@ -5,6 +5,9 @@ module.exports = function(app) {
     .get(controller.list)
     .post(controller.handleSignIn);
 
+    app.route('/signup')
+    .post(controller.handleSignUp)
+
     app.route('/searchGenre')
     .post(controller.searchByGenre);
     app.route('/searchQuery')

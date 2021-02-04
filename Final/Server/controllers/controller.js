@@ -17,53 +17,46 @@ exports.list = (req, res) => {
 }
 
 //handlesignup function
-// router.post('/signup', (req, res, next) => {
-//     const recaptchaData = {
-//         remoteip: req.connection.remoteAddress,
-//         response: _.get(req.body, 'recaptchaResponse'),
-//         secret: process.env.RECAPTCHA_SECRET_KEY,
-//     };
+exports.handleSignUp = (req, res) => {
+    const secretKey = "6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida";
+    // const token = req.body.token;
+    // const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
 
-//     return recaptchaModel.verifyRecaptcha(recaptchaData)
-//         .then(() => {
-//             const secretKey = "6LdLMj8aAAAAAMgyGmCrT1oKQDZEAc7YhWY68ida";
+    if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+        return res.json({ "responseError": "Please select captcha first" });
+    }
 
-//             if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-//                 return res.json({ "responseError": "Please select captcha first" });
-//             }
+    const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 
-//             const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+    request(verificationURL, function (error, response, body) {
+        body = JSON.parse(body);
 
-//             request(verificationURL, function (error, response, body) {
-//                 body = JSON.parse(body);
-
-//                 if (body.success !== undefined && !body.success) {
-//                     return res.json({ "responseError": "Failed captcha verification" });
-//                 }
-//                 else {
-//                     let body = req.body;
-//                     bcrypt.hash(body.password, 10, (err, response) => {
-//                         if (err) console.log(err);
-//                         let user = new Account({
-//                             email: `${body.email}`,
-//                             username: `${body.username}`,
-//                             password: `${response}`,
-//                         });
-//                         user.save((err, person) => {
-//                             if (err) {
-//                                 res.render("signup", {
-//                                     errmsg: "Error"
-//                                 });
-//                             } else {
-//                                 res.redirect("/");
-//                             }
-//                             console.log(`${body.username} added`);
-//                         });
-//                     });
-//                 }
-//             });
-//         });
-// })
+        if (body.success !== undefined && !body.success) {
+            return res.json({ "responseError": "Failed captcha verification" });
+        }
+        else {
+            let body = req.body;
+            bcrypt.hash(body.password, 10, (err, response) => {
+                if (err) console.log(err);
+                let user = new Account({
+                    email: `${body.email}`,
+                    username: `${body.username}`,
+                    password: `${response}`,
+                });
+                user.save((err, person) => {
+                    if (err) {
+                        res.render("signup", {
+                            errmsg: "Error"
+                        });
+                    } else {
+                        res.json({ "response": true });
+                    }
+                    console.log(`${body.username} added`);
+                });
+            });
+        }
+    });
+}
 
 exports.handleSignIn = (req, res) => {
     let name = req.body.username;
@@ -178,5 +171,5 @@ exports.submitReview = (req, res) => {
                 }
             );
         }
-    });    
+    });
 }
