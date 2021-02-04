@@ -15,8 +15,7 @@
 
 .search-input {
   width: 325px;
-  margin-top: -10px;
-  margin-bottom: -10px;
+  margin-bottom: -20px;
 }
 
 .movie-modal {
@@ -432,38 +431,32 @@ img {
 @media screen and (max-width: 600px) {
   .title-page {
     font-size: 32pt;
-    margin-bottom: 8px;
-    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-top: 30px;
   }
 
-  .btn-grid {
-    width: 480px;
-  }
-
-  .btn-grid > div {
-    font-family: "Noto Sans SC", sans-serif;
-    width: 100px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    float: left;
-    background: lightgray;
-    text-align: center;
-    margin-left: 27px;
-  }
-}
-
-@media screen and (max-width: 380px) {
   .btn-grid {
     width: 400px;
   }
 
   .btn-grid > div {
-    font-family: "Noto Sans SC", sans-serif;
     width: 120px;
     padding: 4px 10px;
-    border-radius: 4px;
-    float: left;
-    background: lightgray;
+    margin-left: 27px;
+  }
+
+  .search-input {
+    width: 230px;
+  }
+
+}
+
+@media screen and (max-width: 380px) {
+  .btn-grid {
+    width: 350px;
+  }
+
+  .btn-grid > div {
     text-align: center;
     margin-right: 3px;
     margin-left: 12px;
