@@ -12,4 +12,14 @@ module.exports = function(app) {
     
     app.route('/submitReview')
     .post(controller.submitReview);
+
+    app.route('/makeAdmin')
+    .post(controller.makeAdmin);
+    app.route('/makeNotAdmin')
+    .post(controller.makeNotAdmin);
+
+    app.route('/deleteAccount')
+    .post(controller.deleteAccount);
+    app.route('/deleteReview')
+    .post(controller.deleteReview);
 }

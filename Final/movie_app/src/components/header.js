@@ -35,7 +35,7 @@ const Header = (props) => {
         >
           Log Out
         </a>
-        <a href="javascript:void(0);" class="icon" onClick={() => {
+        <a href="javascript:void(0);" className="icon" onClick={() => {
             var x = document.getElementById("myNavBar");
             if (x.className === "nav-bar") {
                 x.className += " responsive";

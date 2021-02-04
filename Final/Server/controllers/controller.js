@@ -180,3 +180,59 @@ exports.submitReview = (req, res) => {
         }
     });    
 }
+
+exports.makeAdmin = (req, res) => {
+    account.updateOne({ email: req.body.email }, { isAdmin: true })
+    .then(() => {
+        console.log(`${req.body.email} is admin.`);
+        res.json({
+            "success": true
+        });
+    })
+    .catch((err) => {
+        res.json({
+            "success": false
+        });
+    });
+}
+exports.makeNotAdmin = (req, res) => {
+    account.updateOne({ email: req.body.email }, { isAdmin: false })
+    .then(() => {
+        console.log(`${req.body.email} is not admin.`);
+        res.json({
+            "success": true
+        });
+    })
+    .catch((err) => {
+        res.json({
+            "success": false
+        });
+    });
+}
+
+exports.deleteAccount = (req, res) => {
+    account.deleteOne({ email: req.body.email })
+    .then(() => {
+        console.log(`${req.body.email} was deleted`);
+        res.json({
+            "success": true
+        });
+    }).catch((err) => {
+        res.json({
+            "success": false
+        });
+    });
+}
+exports.deleteReview = (req, res) => {
+    account.updateOne({ email: req.body.email }, { $pull: { "reviews": { "movieId": req.body.movieId } } }, { safe: true, multi: true })
+    .then(() => {
+        console.log(`${req.body.movieId} was deleted`);
+        res.json({
+            "success": true
+        });
+    }).catch((err) => {
+        res.json({
+            "success": false
+        });
+    });
+}
