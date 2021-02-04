@@ -95,8 +95,9 @@ class Admin extends Component {
             return (
                 <>
                     <Header />
-                    <div className='admin-container'>
-                        <div className='container'>
+                    <div className='container'>
+                    <h2 className="admin-title">FANDINGO ACCOUNTS</h2>
+                        <div className='admin-container'>
                             {
                                 this.state.accounts.map((account, i) => {
                                     return <AdminContainer key={ i }
