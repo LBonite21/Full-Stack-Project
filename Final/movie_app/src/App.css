@@ -107,7 +107,7 @@
 
   justify-content: center;
   align-items: center;
-  background-color: #707070;
+  background-color: #92B0E3;
 
   padding: 10px;
   margin: 10px;
@@ -120,7 +120,7 @@
 .movie-box:hover {
   cursor: pointer;
 
-  background-color: #444444;
+  background-color: #424141;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
 img {
@@ -269,12 +269,13 @@ img {
 .any-btn {
   /* font-family: "Noto Sans SC", sans-serif; */
   padding: 5px 15px;
-  background: lightgray;
+  background: #ddd;
   margin: 15px;
   text-align: center;
   border-radius: 3px;
   text-decoration: none;
   color: #000;
+  border: 1px black solid;
 }
 
 .any-btn:hover {
@@ -285,19 +286,11 @@ img {
 
 /* Button Grid  */
 
-.btn-container {
-  display: flex;
-  flex-direction: row;
-
-}
-
 .btn-grid {
-  flex: 1;
   width: 1000px;
   /* background: #707070; */
 
   display: flex;
-  flex-direction: column;
   flex-flow: wrap;
 
   justify-content: center;
@@ -306,13 +299,14 @@ img {
 
 .btn-grid > div {
   /* font-family: "Noto Sans SC", sans-serif; */
-  width: 138px;
+  width: 136px;
   padding: 14px 16px;
   border-radius: 4px;
   float: left;
   background: lightgray;
   margin: 15px;
   text-align: center;
+  border: 1px black solid;
 }
 
 .btn-grid > div:hover {

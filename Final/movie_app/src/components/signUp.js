@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 import Header from './header';
 
@@ -40,7 +40,7 @@ class SignUp extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.handleCaptchaResponseChange = this.handleCaptchaResponseChange.bind(this);
+        // this.handleCaptchaResponseChange = this.handleCaptchaResponseChange.bind(this);
     }
 
     componentDidMount = () => {
@@ -138,13 +138,13 @@ class SignUp extends Component {
         }
     }
 
-    handleCaptchaResponseChange(response) {
-        this.setState({
-            recaptchaResponse: response,
-        }, () => {
-            console.log(this.state.recaptchaResponse);
-        });
-    }
+    // handleCaptchaResponseChange(response) {
+    //     this.setState({
+    //         recaptchaResponse: response,
+    //     }, () => {
+    //         console.log(this.state.recaptchaResponse);
+    //     });
+    // }
 
     //put method here to fetch captcha
 
@@ -173,11 +173,11 @@ class SignUp extends Component {
                         {errors.password.length > 0 &&
                             <span className='error'>{errors.password}</span>}
                         <div id="result"></div>
-                        <ReCAPTCHA
+                        {/* <ReCAPTCHA
                             ref={(el) => { this.recaptcha = el; }}
                             sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
                             onChange={this.handleCaptchaResponseChange}
-                        />
+                        /> */}
                         <button value='Submit' onClick={this.handleSignUp}>Submit</button>
                     </div>
                 </div>
