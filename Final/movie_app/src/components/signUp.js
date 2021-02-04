@@ -44,7 +44,7 @@ class SignUp extends Component {
     }
 
     componentDidMount = () => {
-        fetch('http://localhost:3001/', {
+        fetch('https://www.google.com/recaptcha/api/siteverify', {
             method: "GET"
         }).then(res => res.json())
             //not working at moment
@@ -53,7 +53,6 @@ class SignUp extends Component {
                 this.state.accounts.forEach(account => {
                     list.push(account.reviews);
                 });
-                sessionStorage.setItem('reviews', JSON.stringify(list));
             }))
             .catch(e => console.log(e));
     }
@@ -85,14 +84,14 @@ class SignUp extends Component {
             body: JSON.stringify(data)
         }).then(res => res.json())
             .then(result => {
-                if (result.status) {
-                    this.setState({ redirect: true }, () => {
-                        sessionStorage.setItem('user', JSON.stringify(result.account));
-                        this.setState({ redirect: true });
-                    });
-                } else {
-                    console.log('Incorrect Credentials.');
-                }
+                // if (result.status) {
+                //     this.setState({ redirect: true }, () => {
+                //         sessionStorage.setItem('user', JSON.stringify(result.account));
+                //         this.setState({ redirect: true });
+                //     });
+                // } else {
+                //     console.log('Incorrect Credentials.');
+                // }
             });
     }
 
@@ -117,7 +116,7 @@ class SignUp extends Component {
             case 'password':
                 errors.password =
                     passwordRegex.test(value)
-                        ? 'Password must be 8 characters long!'
+                        ? 'Password is invalid. Length of 8, one capital, one special character, and one number'
                         : '';
                 break;
             default:
@@ -148,6 +147,9 @@ class SignUp extends Component {
 
     //put method here to fetch captcha
 
+    //new site key = 6LcIMUkaAAAAAC3smELgHtECXvNaifXeLPuGlfIy
+    //new secret key = 6LcIMUkaAAAAAGMW5HbduvaVkf4Y5_MO81stAdOb
+
     render() {
         const { errors } = this.state;
 
@@ -177,6 +179,7 @@ class SignUp extends Component {
                             ref={(el) => { this.recaptcha = el; }}
                             sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
                             onChange={this.handleCaptchaResponseChange}
+                            render="explicit"
                         />
                         <button value='Submit' onClick={this.handleSignUp}>Submit</button>
                     </div>
