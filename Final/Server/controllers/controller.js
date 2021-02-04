@@ -203,6 +203,52 @@ exports.makeNotAdmin = (req, res) => {
     });
 }
 
+exports.updateAccount = (req, res) => {
+    if (req.body.resetPassword) {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+            let myHash = hash;
+            account.findOneAndUpdate(
+              { email: req.body.email },
+              {
+                $set: {
+                  username: req.body.username, password: myHash, fname: req.body.fname, lname: req.body.lname, email: req.body.email,
+                  street: req.body.street, city: req.body.city, state: req.body.state, zip_code: req.body.zip_code, phone: req.body.phone
+                }
+              },
+              (err, data) => {
+                if (err) res.json({
+                    "success": false,
+                    "error": err
+                });
+                console.log(data);
+                res.json({
+                    "success": true,
+                    "data": data
+                });
+            });
+        });
+    } else {
+        account.findOneAndUpdate(
+        { email: req.body.email },
+        {
+            $set: {
+            username: req.body.username, fname: req.body.fname, lname: req.body.lname, email: req.body.email,
+            street: req.body.street, city: req.body.city, state: req.body.state, zip_code: req.body.zip_code, phone: req.body.phone
+            }
+        }, (err, data) => {
+            if (err) res.json({
+                "success": false,
+                "error": err
+            });
+            console.log(data);
+            res.json({
+                "success": true,
+                "data": data
+            });
+        });
+    }
+}
+
 exports.deleteAccount = (req, res) => {
     account.deleteOne({ email: req.body.email })
     .then(() => {
@@ -217,7 +263,7 @@ exports.deleteAccount = (req, res) => {
     });
 }
 exports.deleteReview = (req, res) => {
-    account.updateOne({ email: req.body.email }, { $pull: { "reviews": { "movieId": req.body.movieId } } }, { safe: true, multi: true })
+    account.updateOne({ username: req.body.username }, { $pull: { "reviews": { "movieId": req.body.movieId } } }, { safe: true, multi: true })
     .then(() => {
         console.log(`${req.body.movieId} was deleted`);
         res.json({

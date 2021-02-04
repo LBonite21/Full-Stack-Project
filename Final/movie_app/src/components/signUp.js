@@ -14,118 +14,116 @@ const validateForm = (errors) => {
 };
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      accounts: [],
-      email: "",
-      userName: "",
-      password: "",
-      redirect: false,
-      errors: {
-        username: "",
-        email: "",
-        password: "",
-      },
-    };
+        this.state = {
+            accounts: [],
+            email: '',
+            userName: '',
+            password: '',
+            redirect: false,
+            errors: {
+                username: '',
+                email: '',
+                password: '',
+            }
+        };
 
-    this.updateUsername = this.updateUsername.bind(this);
-    this.updatePassword = this.updatePassword.bind(this);
-    this.updateEmail = this.updateEmail.bind(this);
+        this.updateUsername = this.updateUsername.bind(this);
+        this.updatePassword = this.updatePassword.bind(this);
+        this.updateEmail = this.updateEmail.bind(this);
 
-    this.handleSignUp = this.handleSignUp.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
-    // this.handleCaptchaResponseChange = this.handleCaptchaResponseChange.bind(this);
-  }
-
-  componentDidMount = () => {
-    fetch("http://localhost:3001/", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      //not working at moment
-      .then((result) =>
-        this.setState({ accounts: result }, () => {
-          let list = [];
-          this.state.accounts.forEach((account) => {
-            list.push(account.reviews);
-          });
-          sessionStorage.setItem("reviews", JSON.stringify(list));
-        })
-      )
-      .catch((e) => console.log(e));
-  };
-
-  updateUsername = (evt) => {
-    this.setState({ username: evt.target.value });
-  };
-  updatePassword = (evt) => {
-    this.setState({ password: evt.target.value });
-  };
-
-  updateEmail = (evt) => {
-    this.setState({ email: evt.target.value });
-  };
-
-  handleSignUp = () => {
-    let data = {
-      username: `${this.state.username}`,
-      email: `${this.state.email}`,
-      password: `${this.state.password}`,
-    };
-
-    fetch("http://localhost:3001/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.status) {
-          this.setState({ redirect: true }, () => {
-            sessionStorage.setItem("user", JSON.stringify(result.account));
-            this.setState({ redirect: true });
-          });
-        } else {
-          console.log("Incorrect Credentials.");
-        }
-      });
-  };
-
-  handleChange = (event) => {
-    event.preventDefault();
-    const { name, value } = event.target;
-    let errors = this.state.errors;
-
-    switch (name) {
-      case "username":
-        errors.username = usernameRegex.test(value)
-          ? "Username is invalid. 2-15 Characters"
-          : "";
-        break;
-      case "email":
-        errors.email = emailRegex.test(value)
-          ? ""
-          : "Email is invalid (ex. email@email.com)";
-        break;
-      case "password":
-        errors.password = passwordRegex.test(value)
-          ? "Password must be 8 characters long!"
-          : "";
-        break;
-      default:
-        break;
+        this.handleCaptchaResponseChange = this.handleCaptchaResponseChange.bind(this);
     }
 
-    this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
-    });
+    componentDidMount = () => {
+        fetch('https://www.google.com/recaptcha/api/siteverify', {
+            method: "GET"
+        }).then(res => res.json())
+            //not working at moment
+            .then(result => this.setState({ accounts: result }, () => {
+                let list = [];
+                this.state.accounts.forEach(account => {
+                    list.push(account.reviews);
+                });
+            }))
+            .catch(e => console.log(e));
+    }
+
+    updateUsername = evt => {
+        this.setState({ username: evt.target.value });
+    }
+    updatePassword = evt => {
+        this.setState({ password: evt.target.value });
+    }
+
+    updateEmail = evt => {
+        this.setState({ email: evt.target.value });
+    }
+
+    handleSignUp = () => {
+        let data = {
+            "username": `${this.state.username}`,
+            "email": `${this.state.email}`,
+            "password": `${this.state.password}`
+        }
+
+        fetch('http://localhost:3001/signup', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+            .then(result => {
+                // if (result.status) {
+                //     this.setState({ redirect: true }, () => {
+                //         sessionStorage.setItem('user', JSON.stringify(result.account));
+                //         this.setState({ redirect: true });
+                //     });
+                // } else {
+                //     console.log('Incorrect Credentials.');
+                // }
+            });
+    }
+
+    handleChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+
+        switch (name) {
+            case 'username':
+                errors.username =
+                    usernameRegex.test(value)
+                        ? 'Username is invalid. 2-15 Characters'
+                        : '';
+                break;
+            case 'email':
+                errors.email =
+                    emailRegex.test(value)
+                        ? ''
+                        : 'Email is invalid (ex. email@email.com)';
+                break;
+            case 'password':
+                errors.password =
+                    passwordRegex.test(value)
+                        ? 'Password is invalid. Length of 8, one capital, one special character, and one number'
+                        : '';
+                break;
+            default:
+                break;
+        }
+
+        this.setState({ errors, [name]: value }, () => {
+            console.log(errors)
+        })
   };
 
   handleSubmit = (event) => {
@@ -146,6 +144,9 @@ class SignUp extends Component {
   // }
 
   //put method here to fetch captcha
+
+  //new site key = 6LcIMUkaAAAAAC3smELgHtECXvNaifXeLPuGlfIy
+  //new secret key = 6LcIMUkaAAAAAGMW5HbduvaVkf4Y5_MO81stAdOb
 
   render() {
     const { errors } = this.state;

@@ -30,7 +30,12 @@ class Login extends Component {
           // Adds all the reviews to a session variable
           let list = [];
           this.state.accounts.forEach((account) => {
-            list.push(account.reviews);
+            if (account.reviews.length > 0) {
+              account.reviews.forEach(review => {
+                review.username = account.username;
+                list.push(review);
+              });
+            }
           });
           sessionStorage.setItem("reviews", JSON.stringify(list));
         })

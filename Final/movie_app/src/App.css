@@ -75,6 +75,34 @@
   font-size: 25pt;
 }
 
+.alert {
+  color: red;
+  font-size: 10pt;
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.account-container {
+  display: flex;
+  flex-direction: row-reverse;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+}
+.account-review {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -141,6 +169,9 @@
 
   background-color: #424141;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+}
+.movie-box img:hover {
+  cursor: pointer;
 }
 img {
   height: 100%;

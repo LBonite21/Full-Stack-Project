@@ -25,4 +25,7 @@ module.exports = function(app) {
     .post(controller.deleteAccount);
     app.route('/deleteReview')
     .post(controller.deleteReview);
+
+    app.route('/updateAccount')
+    .post(controller.updateAccount);
 }
