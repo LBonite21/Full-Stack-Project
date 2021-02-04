@@ -41,15 +41,6 @@ const Header = (props) => {
         {accountPage}
         {adminPage}
         {logOut}
-        <a
-          href="javascript:void(0);"
-          class="icon"
-          onClick={() => {
-            sessionStorage.removeItem("user");
-          }}
-        >
-          Log Out
-        </a>
         <a href="javascript:void(0);" className="icon" onClick={() => {
             var x = document.getElementById("myNavBar");
             if (x.className === "nav-bar") {

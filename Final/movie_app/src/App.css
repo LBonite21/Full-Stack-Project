@@ -238,6 +238,9 @@ img {
 .login-form {
   flex: 1;
   float: left;
+
+  margin-top: 40px;
+  margin-left: 350px;
   /* position: relative; */
   /* left: -50%; */
 }
@@ -246,22 +249,105 @@ img {
   margin-top: 5px;
   margin-bottom: 5px;
 
-  width: 350px;
+  width: 325px;
 }
 
 .login-form a.any-btn {
   margin: 0;
 }
 
-.title {
+/* .title {
   font-size: 60pt;
+  letter-spacing: 8px;
+
   margin: 0;
+  margin-bottom: 10px;
+  margin-left: 350px;
+} */
+
+.title-before {
+  font-size: 60pt;
+  letter-spacing: 8px;
+
+  margin: -30px -50px 30px;
+}
+
+.title-after {
+  font-size: 60pt;
+  letter-spacing: 8px;
+
+  margin-top: -20px;
   margin-bottom: 30px;
 }
 
-.login-dingo {
+.login-dingo-before {
+  width: 350px;
+  height: 350px;
+  /* margin-bottom: 20px; */
+  
+  /* position: relative; */
+  position: absolute;
+  top: 105px;
+  left: 160px;
+  /* bottom: 380px; */
+}
+
+.login-dingo-after {
   width: 250px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  /* margin-bottom: 20px; */
+}
+
+.login-after {
+  text-align: center;
+}
+
+.signup-label {
+  margin-right: 10px;
+}
+
+.personality-container {
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 18px;
+  width: 1000px;
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 40pt;
+    margin: 0;
+  }
+
+  .login-form {
+    flex: 1;
+    float: left;
+  
+    margin: 0;
+    margin-top: 30px;
+    /* margin-left: 400px; */
+    /* position: relative; */
+    /* left: -50%; */
+  }
+
+  .login-input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  
+    width: 250px;
+  }
+
+  .login-dingo-before {
+    display: none;
+  }
+
+  .personality-container {
+    width: 270px;
+    font-size: 8pt;
+    /* float: left; */
+    text-align: left;
+  }
+
 }
 
 /* Single Button */
