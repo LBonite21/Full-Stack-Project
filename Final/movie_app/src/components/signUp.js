@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-// import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import Header from './header';
 
@@ -40,7 +40,7 @@ class SignUp extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
-        // this.handleCaptchaResponseChange = this.handleCaptchaResponseChange.bind(this);
+        this.handleCaptchaResponseChange = this.handleCaptchaResponseChange.bind(this);
     }
 
     componentDidMount = () => {
@@ -141,6 +141,8 @@ class SignUp extends Component {
     handleCaptchaResponseChange(response) {
         this.setState({
             recaptchaResponse: response,
+        }, () => {
+            console.log(this.state.recaptchaResponse);
         });
     }
 
@@ -154,31 +156,29 @@ class SignUp extends Component {
                 <Header />
                 <div className='container'>
                     <div>
-                        <form onSubmit={this.handleSubmit}>
-                            {/* <p class="error_label">{errmsg}</p> */}
-                            <label htmlFor='email'>Email </label>
-                            <input type='text' name='email' placeholder="Email" id="email" className="signup_field"
-                                onChange={this.handleChange} />
-                            {errors.username.length > 0 &&
-                                <span className='error'>{errors.username}</span>}
-                            <label htmlFor='username'>Username </label>
-                            <input type='text' name='username' placeholder="Username" id="username" className="signup_field"
-                                onChange={this.handleChange} />
-                            {errors.email.length > 0 &&
-                                <span className='error'>{errors.email}</span>}
-                            <label htmlFor='password'>Password </label>
-                            <input type='password' name='password' placeholder="Password" id="password" className="signup_field"
-                                onChange={this.handleChange} />
-                            {errors.password.length > 0 &&
-                                <span className='error'>{errors.password}</span>}
-                            <div id="result"></div>
-                            {/* <ReCAPTCHA
-                                ref={(el) => { this.recaptcha = el; }}
-                                sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
-                                onChange={this.handleCaptchaResponseChange}
-                            /> */}
-                            <input type='submit' value='Submit' onClick={this.handleSignUp} />
-                        </form>
+                        {/* <p class="error_label">{errmsg}</p> */}
+                        <label htmlFor='email'>Email </label>
+                        <input type='text' name='email' placeholder="Email" id="email" className="signup_field"
+                            onChange={this.handleChange} />
+                        {errors.username.length > 0 &&
+                            <span className='error'>{errors.username}</span>}
+                        <label htmlFor='username'>Username </label>
+                        <input type='text' name='username' placeholder="Username" id="username" className="signup_field"
+                            onChange={this.handleChange} />
+                        {errors.email.length > 0 &&
+                            <span className='error'>{errors.email}</span>}
+                        <label htmlFor='password'>Password </label>
+                        <input type='password' name='password' placeholder="Password" id="password" className="signup_field"
+                            onChange={this.handleChange} />
+                        {errors.password.length > 0 &&
+                            <span className='error'>{errors.password}</span>}
+                        <div id="result"></div>
+                        <ReCAPTCHA
+                            ref={(el) => { this.recaptcha = el; }}
+                            sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
+                            onChange={this.handleCaptchaResponseChange}
+                        />
+                        <button value='Submit' onClick={this.handleSignUp}>Submit</button>
                     </div>
                 </div>
             </>

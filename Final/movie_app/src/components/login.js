@@ -118,7 +118,16 @@ class Login extends Component {
           {/* <p>agustind</p>
           <p>UoNt-Kvx2</p> */}
           {/* </div> */}
-        </div>
+            <div className='personality-container'>
+              <h1>
+                This website is for all shapes and sizes! Male and females as well as anything 
+                in between are welcome to view our website!
+              </h1>
+              <h1>
+                Handmade by the Grunts at Neumont
+              </h1>
+            </div>
+          </div>
       </>
     );
   }
