@@ -1,25 +1,16 @@
-// const Bluebird = require('bluebird');
-// const Recaptcha = require('recaptcha-v2').Recaptcha;
+var widgetId1;
 
-// /**
-//  * Verify ReCaptcha
-//  * @param {Object} recaptchaData
-//  * @returns {Promise}
-//  */
-// exports.verifyRecaptcha = (recaptchaData) => {
-//     if (process.env.RECAPTCHA_SKIP_ENABLED === 'true') {
-//         return Bluebird.resolve();
-//     }
-
-//     return new Bluebird((resolve, reject) => {
-//         const recaptcha = new Recaptcha(process.env.RECAPTCHA_SITE_KEY, process.env.RECAPTCHA_SECRET_KEY, recaptchaData);
-
-//         recaptcha.verify((success) => {
-//             if (success) {
-//                 return resolve();
-//             }
-
-//             reject(new Error());
-//         });
-//     });
-// };
+var verifyCallback = function (response) {
+    alert(response)
+};
+var onloadCallback = function () {
+    widgetId1 = grecaptcha.render('result', {
+        'sitekey': '6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ',
+        'theme': 'light'
+    });
+    grecaptcha.ready(function () {
+        grecaptcha.execute('6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ', { action: 'signup' })
+            .then(function (token) {
+            });
+    });
+};
