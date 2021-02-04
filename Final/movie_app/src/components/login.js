@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import "../App.css";
 import Header from "./header";
 
@@ -75,14 +75,28 @@ class Login extends Component {
   render() {
     let afterLoggedIn;
     let beforeLoggedIn = (
-      <div>
+      <div className="login-form">
+        <h1>Fandingo</h1>
         <label htmlFor="username">Username </label>
+        <br />
         <input type="text" name="username" onChange={this.updateUsername} />
         <br />
+        <br />
         <label htmlFor="password">Password </label>
+        <br />
         <input type="password" name="password" onChange={this.updatePassword} />
         <br />
-        <input type="submit" value="Submit" onClick={this.handleSignIn} />
+        <br />
+        <a onClick={this.handleSignIn} className="any-btn">
+          Log In
+        </a>
+        <br />
+        <br />
+        <br />
+        <label>Not a member?  </label>
+        <a href="/signUp" className="any-btn">Sign Up</a>
+        <p>agustind</p>
+        <p>UoNt-Kvx2</p>
       </div>
     );
 
@@ -96,12 +110,12 @@ class Login extends Component {
         <Header />
         <br />
         <div className="login-container">
-          <div className="login-form">
-            {beforeLoggedIn}
-            {afterLoggedIn}
-            <p>agustind</p>
-            <p>UoNt-Kvx2</p>
-          </div>
+          {/* <div className="login-form"> */}
+          {beforeLoggedIn}
+          {afterLoggedIn}
+          {/* <p>agustind</p>
+          <p>UoNt-Kvx2</p> */}
+          {/* </div> */}
         </div>
       </>
     );
