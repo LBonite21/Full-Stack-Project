@@ -152,21 +152,21 @@ class SignUp extends Component {
                         <input type='text' name='email' placeholder="Email..." id="email" className="login-input"
                             onChange={this.handleChange} />
                         {errors.username.length > 0 &&
-                            <span className='error'>{errors.username}</span>}
+                            <span className='error alert'>{errors.username}</span>}
                         <br/>    
                         <label htmlFor='username'>Username </label>
                         <br/>
                         <input type='text' name='username' placeholder="Username..." id="username" className="login-input"
                             onChange={this.handleChange} />
                         {errors.email.length > 0 &&
-                            <span className='error'>{errors.email}</span>}
+                            <span className='error alert'>{errors.email}</span>}
                         <br/>
                         <label htmlFor='password'>Password </label>
                         <br/>
                         <input type='password' name='password' placeholder="Password..." id="password" className="login-input"
                             onChange={this.handleChange} />
                         {errors.password.length > 0 &&
-                            <span className='error'>{errors.password}</span>}
+                            <span className='error alert'>{errors.password}</span>}
                         <div id="result"></div>
                         <ReCAPTCHA
                             ref={(el) => { this.recaptcha = el; }}
