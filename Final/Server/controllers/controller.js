@@ -30,6 +30,7 @@ exports.handleSignUp = (req, res) => {
 
     request(verificationURL, function (error, response, body) {
         body = JSON.parse(body);
+        console.log(body);
 
         if (body.success !== undefined && !body.success) {
             return res.json({ "responseError": "Failed captcha verification" });
