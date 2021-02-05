@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import "../App.css";
 import Header from "./header";
 
@@ -30,7 +30,12 @@ class Login extends Component {
           // Adds all the reviews to a session variable
           let list = [];
           this.state.accounts.forEach((account) => {
-            list.push(account.reviews);
+            if (account.reviews.length > 0) {
+              account.reviews.forEach(review => {
+                review.username = account.username;
+                list.push(review);
+              });
+            }
           });
           sessionStorage.setItem("reviews", JSON.stringify(list));
         })
@@ -75,20 +80,44 @@ class Login extends Component {
   render() {
     let afterLoggedIn;
     let beforeLoggedIn = (
-      <div>
+      <div className="login-form">
+        <h1 className="title-before">FANDINGO</h1>
+        <img src="./img/dingo.png" className="login-dingo-before"/>
         <label htmlFor="username">Username </label>
-        <input type="text" name="username" onChange={this.updateUsername} />
+        <br />
+        <input type="text" name="username" className="login-input" onChange={this.updateUsername} />
+        <br />
         <br />
         <label htmlFor="password">Password </label>
-        <input type="password" name="password" onChange={this.updatePassword} />
         <br />
-        <input type="submit" value="Submit" onClick={this.handleSignIn} />
+        <input type="password" name="password" className="login-input" onChange={this.updatePassword} />
+        <br />
+        <br />
+        <br />
+        <a onClick={this.handleSignIn} className="any-btn">
+          Log In
+        </a>
+        <br />
+        <br />
+        <br />
+        <label className="signup-label">Not a member? </label>
+        <a href="/signUp" className="any-btn">Sign Up!</a>
+        <p>agustind</p>
+        <p>UoNt-Kvx2</p>
       </div>
     );
 
     if (this.state.redirect || sessionStorage.getItem("user")) {
       beforeLoggedIn = <p></p>;
-      afterLoggedIn = <a href="/movies">Visit Movie Page!</a>;
+      afterLoggedIn = (
+          <div className="login-after">
+            <h1 className="title-after">WELCOME TO FANDINGO!</h1>
+            <a href="/movies" className="any-btn">Visit Movie Page!</a>
+            <br />
+            <br />
+            <img src="./img/dingo.png" className="login-dingo-after"/>
+        </div>
+      );
     }
 
     return (
@@ -96,22 +125,18 @@ class Login extends Component {
         <Header />
         <br />
         <div className="login-container">
-          <div className="login-form">
-            {beforeLoggedIn}
-            {afterLoggedIn}
-            <p>agustind</p>
-            <p>UoNt-Kvx2</p>
+          {beforeLoggedIn}
+          {afterLoggedIn}
             <div className='personality-container'>
-              <h1>
+              <h2>
                 This website is for all shapes and sizes! Male and females as well as anything 
                 in between are welcome to view our website!
-              </h1>
-              <h1>
+              </h2>
+              <h2>
                 Handmade by the Grunts at Neumont
-              </h1>
+              </h2>
             </div>
           </div>
-        </div>
       </>
     );
   }

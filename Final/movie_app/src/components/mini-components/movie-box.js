@@ -21,6 +21,7 @@ class MovieBox extends Component {
         .then(result => this.setState({ accounts: result }, () => {
             // Adds all the reviews to a session variable
             let list = [];
+            sessionStorage.removeItem('reviews');
             this.state.accounts.forEach(account => {
                 account.reviews.forEach(review => {
                     let rev = {
@@ -31,6 +32,7 @@ class MovieBox extends Component {
                     }
                     list.push(rev);
                 });
+                sessionStorage.setItem("reviews", JSON.stringify(list));
             });
             this.setState({ reviews: list });
         }))

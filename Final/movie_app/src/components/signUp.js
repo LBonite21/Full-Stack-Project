@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { Component } from "react";
+import { render } from "react-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
-import Header from './header';
+import Header from "./header";
 
 const usernameRegex = /^.{2,15}$/;
 const emailRegex = /^.+@.{2,}\.[A-Za-z0-9]{2,}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\!\@\#\$\%\^\&\*\(\)\[\]\{\}\;\:\'\"\\<\>\,\.\/\?]).{8,}$/;
 const validateForm = (errors) => {
     let valid = true;
-    Object.values(errors).forEach(
-        (val) => val.length > 0 && (valid = false)
-    );
+    Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
     return valid;
-}
+};
 
 class SignUp extends Component {
     constructor(props) {
@@ -118,6 +116,15 @@ class SignUp extends Component {
         this.setState({ errors, [name]: value }, () => {
             console.log(errors)
         })
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        if (validateForm(this.state.errors)) {
+            console.info("Valid Form");
+        } else {
+            console.error("Invalid Form");
+        }
     }
 
     handleSubmit = (event) => {
