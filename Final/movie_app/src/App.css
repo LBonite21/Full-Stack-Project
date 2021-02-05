@@ -52,6 +52,7 @@ table {
 
 .center-me {
   text-align: center;
+  font-size: 18pt;
 }
 
 .title-page {
@@ -347,9 +348,9 @@ img {
 
 .title-after {
   font-size: 60pt;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
 
-  margin-top: -20px;
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 
@@ -360,15 +361,15 @@ img {
 
   /* position: relative; */
   position: absolute;
-  top: 130px;
+  top: 118px;
   left: 160px;
   /* bottom: 380px; */
 }
 
 .login-dingo-after {
   width: 250px;
-  margin-top: 20px;
-  /* margin-bottom: 20px; */
+  margin-top: 40px;
+  margin-bottom: -30px;
 }
 
 .login-after {
@@ -380,9 +381,11 @@ img {
 }
 
 .personality-container {
+  /* font-family: "Noto Sans SC", sans-serif; */
+  font-size: 15pt;
   text-align: center;
   line-height: 1.5;
-  margin-top: 18px;
+  margin-top: 100px;
   width: 1000px;
 }
 
@@ -531,7 +534,7 @@ img {
   flex: 1;
   float: left;
 
-  margin-top: 9px;
+  margin-top: 6px;
   margin-left: 315px;
 }
 
@@ -586,8 +589,10 @@ img {
 /* Admin Page  */
 
 .admin-title {
-  font-size: 30pt;
+  font-size: 40pt;
   letter-spacing: 3px;
+  margin-top: 30px;
+  font-weight: 600;
 }
 
 .admin-container {
@@ -602,7 +607,11 @@ img {
 .admin-container div.container {
   border: 1px black solid;
   width: 400px;
-  margin-top: 30px;
+  margin-top: 50px;
+}
+
+.admin-container .container > p {
+  margin: 20px 0px 0px 0px;
 }
 
 .account-container {

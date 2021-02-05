@@ -157,7 +157,9 @@ class SignUp extends Component {
         <div className="signup-container">
           <div className="signup-form">
             <h1 className="title-before">FANDINGO</h1>
+            <br />
             <h2 className="center-me">Sign Up!</h2>
+            <br />
             <img src="./img/dingo.png" className="login-dingo-before" />
             {/* <p class="error_label">{errmsg}</p> */}
             <label htmlFor="email">Email </label>
