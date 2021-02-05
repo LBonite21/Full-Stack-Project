@@ -6,7 +6,7 @@ var verifyCallback = function (response) {
 var onloadCallback = function () {
     widgetId1 = grecaptcha.render('result', {
         'sitekey': '6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ',
-        'theme': 'light'
+        'theme': 'dark'
     });
     grecaptcha.ready(function () {
         grecaptcha.execute('6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ', { action: 'signup' })

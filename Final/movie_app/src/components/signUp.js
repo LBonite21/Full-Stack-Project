@@ -75,24 +75,22 @@ class SignUp extends Component {
             "password": `${this.state.password}`
         }
 
-        fetch('http://localhost:3001/signup', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(res => res.json())
-            .then(result => {
-                // if (result.status) {
-                //     this.setState({ redirect: true }, () => {
-                //         sessionStorage.setItem('user', JSON.stringify(result.account));
-                //         this.setState({ redirect: true });
-                //     });
-                // } else {
-                //     console.log('Incorrect Credentials.');
-                // }
-            });
+        if (this.state.isVerified) {
+            fetch('http://localhost:3001/signup', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json())
+                .then(result => {
+                    window.location = "/";
+                });
+        }
+        else {
+            alert("Captcha Required to verify");
+        }
     }
 
     handleChange = (event) => {
@@ -101,23 +99,17 @@ class SignUp extends Component {
         let errors = this.state.errors;
 
         switch (name) {
-            case 'username':
-                errors.username =
-                    usernameRegex.test(value)
-                        ? 'Username is invalid. 2-15 Characters'
-                        : '';
+            case 'password':
+                errors.password =
+                    passwordRegex.test(value) ? '' : 'Password is invalid. Length of 8, one capital, one special character, and one number';
                 break;
             case 'email':
                 errors.email =
-                    emailRegex.test(value)
-                        ? ''
-                        : 'Email is invalid (ex. email@email.com)';
+                    emailRegex.test(value) ? '' : 'Email is invalid (ex. email@email.com)';
                 break;
-            case 'password':
-                errors.password =
-                    passwordRegex.test(value)
-                        ? 'Password is invalid. Length of 8, one capital, one special character, and one number'
-                        : '';
+            case 'username':
+                errors.username =
+                    usernameRegex.test(value) ? '' : 'Username is invalid. 2-15 Characters';
                 break;
             default:
                 break;
@@ -139,9 +131,7 @@ class SignUp extends Component {
 
     handleCaptchaResponseChange(response) {
         this.setState({
-            recaptchaResponse: response,
-        }, () => {
-            console.log(this.state.recaptchaResponse);
+            isVerified: true
         });
     }
 
@@ -179,7 +169,6 @@ class SignUp extends Component {
                             ref={(el) => { this.recaptcha = el; }}
                             sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
                             onChange={this.handleCaptchaResponseChange}
-                            render="explicit"
                         />
                         <button value='Submit' onClick={this.handleSignUp}>Submit</button>
                     </div>
