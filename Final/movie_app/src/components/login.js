@@ -12,6 +12,7 @@ class Login extends Component {
       username: "",
       password: "",
       redirect: false,
+      wrong_credentials: false,
     };
 
     this.updateUsername = this.updateUsername.bind(this);
@@ -72,12 +73,17 @@ class Login extends Component {
             this.setState({ redirect: true });
           });
         } else {
-          console.log("Incorrect Credentials.");
+          this.setState({ wrong_credentials: true });
         }
       });
   };
 
   render() {
+    let wrong_credentials = <span></span>;
+    if (this.state.wrong_credentials) {
+      wrong_credentials = <span className='alert'>Username or Password is incorrect.</span>;
+    }
+
     let afterLoggedIn;
     let beforeLoggedIn = (
       <div className="login-form">
@@ -87,6 +93,7 @@ class Login extends Component {
         <br />
         <input type="text" name="username" placeholder="Username..." className="login-input" onChange={this.updateUsername} />
         <br />
+        { wrong_credentials }
         <br />
         <label htmlFor="password">Password </label>
         <br />
