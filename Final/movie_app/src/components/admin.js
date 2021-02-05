@@ -95,16 +95,17 @@ class Admin extends Component {
             return (
                 <>
                     <Header />
-                    <div className='container'>
-                    <h2 className="admin-title">FANDINGO ACCOUNTS</h2>
+                    <div className='admin2-container'>
                         <div className='admin-container'>
-                            {
-                                this.state.accounts.map((account, i) => {
-                                    return <AdminContainer key={ i }
-                                    account={ account }
-                                    updateAccounts={ this.updateAccounts }/>
-                                })
-                            }
+                            <div className='admin-container'>
+                                {
+                                    this.state.accounts.map((account, i) => {
+                                        return <AdminContainer key={ i }
+                                        account={ account }
+                                        updateAccounts={ this.updateAccounts }/>
+                                    })
+                                }
+                            </div>
                         </div>
                         <div className='account-review'>
                             {
