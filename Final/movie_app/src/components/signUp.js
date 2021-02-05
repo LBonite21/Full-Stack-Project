@@ -77,7 +77,7 @@ class SignUp extends Component {
                 body: JSON.stringify(data)
             }).then(res => res.json())
                 .then(result => {
-                    window.location = "/";
+                    console.log(result);
                 });
         }
         else {
@@ -167,7 +167,7 @@ class SignUp extends Component {
                             sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
                             onChange={this.handleCaptchaResponseChange}
                         />
-                        <button value='Submit' className="any-btn" onClick={this.handleSignUp}>Submit</button>
+                        <div className="any-btn" onClick={this.handleSignUp}>Submit</div>
                     </div>
                 </div>
             </>
