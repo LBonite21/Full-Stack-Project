@@ -85,12 +85,12 @@ class Login extends Component {
         <img src="./img/dingo.png" className="login-dingo-before"/>
         <label htmlFor="username">Username </label>
         <br />
-        <input type="text" name="username" className="login-input" onChange={this.updateUsername} />
+        <input type="text" name="username" placeholder="Username..." className="login-input" onChange={this.updateUsername} />
         <br />
         <br />
         <label htmlFor="password">Password </label>
         <br />
-        <input type="password" name="password" className="login-input" onChange={this.updatePassword} />
+        <input type="password" name="password" placeholder="Password..." className="login-input" onChange={this.updatePassword} />
         <br />
         <br />
         <br />

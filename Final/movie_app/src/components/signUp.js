@@ -157,17 +157,22 @@ class SignUp extends Component {
                     <div>
                         {/* <p class="error_label">{errmsg}</p> */}
                         <label htmlFor='email'>Email </label>
-                        <input type='text' name='email' placeholder="Email" id="email" className="signup_field"
+                        <br/>
+                        <input type='text' name='email' placeholder="Email..." id="email" className="login-input"
                             onChange={this.handleChange} />
                         {errors.username.length > 0 &&
                             <span className='error'>{errors.username}</span>}
+                        <br/>    
                         <label htmlFor='username'>Username </label>
-                        <input type='text' name='username' placeholder="Username" id="username" className="signup_field"
+                        <br/>
+                        <input type='text' name='username' placeholder="Username..." id="username" className="login-input"
                             onChange={this.handleChange} />
                         {errors.email.length > 0 &&
                             <span className='error'>{errors.email}</span>}
+                        <br/>
                         <label htmlFor='password'>Password </label>
-                        <input type='password' name='password' placeholder="Password" id="password" className="signup_field"
+                        <br/>
+                        <input type='password' name='password' placeholder="Password..." id="password" className="login-input"
                             onChange={this.handleChange} />
                         {errors.password.length > 0 &&
                             <span className='error'>{errors.password}</span>}
@@ -177,7 +182,7 @@ class SignUp extends Component {
                             sitekey="6LdLMj8aAAAAAGW2SUWdVFKCC94OBcc6A4KMM3DZ"
                             onChange={this.handleCaptchaResponseChange}
                         />
-                        <button value='Submit' onClick={this.handleSignUp}>Submit</button>
+                        <button value='Submit' className="any-btn" onClick={this.handleSignUp}>Submit</button>
                     </div>
                 </div>
             </>
