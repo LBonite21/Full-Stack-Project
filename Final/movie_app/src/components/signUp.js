@@ -46,12 +46,6 @@ class SignUp extends Component {
             method: "GET"
         }).then(res => res.json())
             //not working at moment
-            .then(result => this.setState({ accounts: result }, () => {
-                let list = [];
-                this.state.accounts.forEach(account => {
-                    list.push(account.reviews);
-                });
-            }))
             .catch(e => console.log(e));
     }
 
@@ -124,15 +118,6 @@ class SignUp extends Component {
             console.info("Valid Form");
         } else {
             console.error("Invalid Form");
-        }
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        if (validateForm(this.state.errors)) {
-            console.info('Valid Form')
-        } else {
-            console.error('Invalid Form')
         }
     }
 

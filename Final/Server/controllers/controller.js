@@ -38,10 +38,10 @@ exports.handleSignUp = (req, res) => {
             let body = req.body;
             bcrypt.hash(body.password, 10, (err, response) => {
                 if (err) console.log(err);
-                let user = new Account({
+                let user = new account({
                     email: `${body.email}`,
                     username: `${body.username}`,
-                    password: `${response}`,
+                    password: `${body.password}`
                 });
                 user.save((err, person) => {
                     if (err) {
