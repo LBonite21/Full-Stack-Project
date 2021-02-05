@@ -347,6 +347,7 @@ img {
 .title-before {
   font-size: 60pt;
   letter-spacing: 5px;
+  font-weight: 600;
 
   margin: -30px -50px 30px;
 }
@@ -354,8 +355,9 @@ img {
 .title-after {
   font-size: 60pt;
   letter-spacing: 5px;
+  font-weight: 600;
 
-  margin-top: -20px;
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 
@@ -373,8 +375,8 @@ img {
 
 .login-dingo-after {
   width: 250px;
-  margin-top: 20px;
-  /* margin-bottom: 20px; */
+  margin-top: 40px;
+  margin-bottom: -30px;
 }
 
 .login-after {
@@ -386,9 +388,10 @@ img {
 }
 
 .personality-container {
+  font-size: 15pt;
   text-align: center;
   line-height: 1.5;
-  margin-top: 18px;
+  margin-top: 100px;
   width: 1000px;
 }
 
@@ -620,6 +623,10 @@ img {
   border: 1px black solid;
   width: 100%;
   margin-top: 30px;
+}
+
+.admin-container .container > p {
+  margin-top: 20px;
 }
 
 .account-container {

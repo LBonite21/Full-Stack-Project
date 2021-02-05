@@ -119,6 +119,7 @@ class Login extends Component {
       afterLoggedIn = (
           <div className="login-after">
             <h1 className="title-after">WELCOME TO FANDINGO!</h1>
+            <br/>
             <a href="/movies" className="any-btn">Visit Movie Page!</a>
             <br />
             <br />
