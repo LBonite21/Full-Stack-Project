@@ -3,6 +3,7 @@ let account = require('../model/accountModel');
 // const recaptchaModel = require('../model/recaptcha');
 const bcrypt = require("bcrypt");
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const request = require('request');
 
 exports.root = (req, res) => {
     res.send("API is running!");
@@ -22,6 +23,7 @@ exports.handleSignUp = (req, res) => {
     // const token = req.body.token;
     // const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
 
+    console.log(req.body);
     if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
         return res.json({ "responseError": "Please select captcha first" });
     }
@@ -43,7 +45,7 @@ exports.handleSignUp = (req, res) => {
                 let user = new account({
                     email: `${body.email}`,
                     username: `${body.username}`,
-                    password: `${body.password}`
+                    password: `${response}`
                 });
                 user.save((err, person) => {
                     if (err) {

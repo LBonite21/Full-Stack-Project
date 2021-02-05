@@ -23,6 +23,7 @@ class SignUp extends Component {
             userName: '',
             password: '',
             redirect: false,
+            response: "",
             errors: {
                 username: '',
                 email: '',
@@ -64,7 +65,8 @@ class SignUp extends Component {
         let data = {
             "username": `${this.state.username}`,
             "email": `${this.state.email}`,
-            "password": `${this.state.password}`
+            "password": `${this.state.password}`,
+            "g-recaptcha-response": this.state.response
         }
 
         if (this.state.isVerified) {
@@ -77,7 +79,9 @@ class SignUp extends Component {
                 body: JSON.stringify(data)
             }).then(res => res.json())
                 .then(result => {
-                    console.log(result);
+                    if (result.response) {
+                        window.location = "/";
+                    }
                 });
         }
         else {
@@ -124,6 +128,8 @@ class SignUp extends Component {
     handleCaptchaResponseChange(response) {
         this.setState({
             isVerified: true
+        }, () => {
+            this.setState({ response: response });
         });
     }
 
