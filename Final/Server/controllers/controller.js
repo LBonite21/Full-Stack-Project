@@ -36,6 +36,7 @@ exports.handleSignUp = (req, res) => {
         }
         else {
             let body = req.body;
+            console.log(body);
             bcrypt.hash(body.password, 10, (err, response) => {
                 if (err) console.log(err);
                 let user = new Account({
